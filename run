@@ -1,0 +1,10 @@
+#!/bin/bash
+
+while $(true); do
+    if [ "$(git diff OWER.dor)" != "" ]; then
+        dot -Tsvg OWER.dot -o live.svg
+        git add live.svg
+        git add OWER.dot
+        git push origin HEAD:refs/heads/live
+    fi
+done
