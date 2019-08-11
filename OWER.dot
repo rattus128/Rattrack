@@ -1,0 +1,289 @@
+digraph G {
+
+#-----------------------------------------------------
+#Kakariko Village
+Kak[ shape="box", label="\Kak
+
+Well
+
+Impas House
+Impas Back
+Skul House
+Shooting
+Windmill
+Boss's House
+Bazaar
+Potion Shop
+Potion Back
+Grannys
+Bomb G
+Open G
+"]
+	Kak -> TrailFromKak [ label="Trail" ]
+	Kak -> GYFromKak [ label="GY" ]
+	Kak -> FieldFromKak [ label="Field" ]
+	
+#-----------------------------------------------------
+#Graveyard
+GY[ shape="box", label="\Kak
+
+Shadow
+
+Hut
+Shield Grave
+Dampes Grave
+Suns Grave
+Royal Tomb
+"]
+    GY -> KakFromGY [ label="Kak" ]
+	
+#-----------------------------------------------------
+#Kokiri Forest
+
+Kok[ shape="box", label="\Kok
+
+Deku Tree
+
+Midos
+Shop
+Know it All
+Links
+Sarias
+Twins
+Storms G
+"]
+	Kok -> WoodsFromKok [ label = "Woods" ]
+	Kok -> FieldFromKok [ label = "Field" ]
+	
+#-----------------------------------------------------
+#Lost Woods
+Woods[shape="box", label="\Woods
+
+Warp Bomb G
+SFM Bomb G
+Open G
+"]
+	Woods -> ZRFromWoods [ label = "ZR" ]
+	Woods -> GoronFromWoods [ label = "Goron" ]
+	Woods -> KokFromWoods [ label = "Kok" ]
+	Woods -> SFMFromWoods [ label = "SFM" ]
+
+#-----------------------------------------------------
+#Sacred Forest Meadow
+SFM[shape="box", label="\SFM
+
+Forest Temple
+
+Bomb G
+Open G
+Storms G
+"]
+	SFM -> WoodsFromSFM [ label = "Woods" ]
+	
+#-----------------------------------------------------
+#Zoras River
+ZR[shape="box", label="\ZR
+
+Storms G
+Bomb G
+Open G
+"]
+	ZR -> FieldFromZR [ label = "Field" ]
+	ZR -> ZDFromZR [ label = "ZD" ]
+	ZR -> WoodsFromZR [ label = "Woods" ]
+	
+#-----------------------------------------------------
+#Zoras Domain
+ZD[shape="box", label="\ZD
+
+Shop
+Storms G
+"]
+	ZD -> ZRFromZD [ label = "ZR" ]
+	ZD -> ZFFromZD [ label = "ZF" ]
+	ZD -> LakeFromZD [ label = "Lake"]
+
+#-----------------------------------------------------
+#Zoras Fountain
+ZF[shape="box", label="\ZF
+	
+Jabu
+Ice Cavern
+
+Fairy
+"]
+	ZF -> ZDFromZF [ label = "ZD" ]
+
+#-----------------------------------------------------
+#Death Mountain Trail
+Trail[ shape="box", label="\Trail
+
+Dodongos
+
+Fairy
+Bomb G
+Storms G
+"]
+    Trail -> GoronFromTrail [ label="Goron" ]
+    Trail -> KakFromTrail [ label="Kak" ]
+    Trail -> CraterFromTrail [ label="Crater" ]
+
+#-----------------------------------------------------
+#Death Mountain Crater
+Crater[ shape="box", label="\Crater
+
+Fire Temple
+
+Fairy
+Hammer G
+Bomb G
+"]
+    Crater -> GoronFromCrater  [ label="Goron" ]
+    Crater -> TrailFromCrater  [ label="Trail" ]
+
+#-----------------------------------------------------
+#Goron City
+Goron[ shape="box", label="\Goron
+
+Shop
+Open G
+"]
+    Goron -> WoodsFromGoron [ label="Woods"]
+    Goron -> TrailFromGoron [ label="Trail"]
+    Goron -> CraterFromGoron [ label="Trail"]
+
+#-----------------------------------------------------
+#Gerudo Valley
+GV[shape="box", label="\GV
+
+Tent
+Storms G
+"]
+    GV -> FieldFromGV [ label="Field"]
+    GV -> GFFromGV [ label="GF"]
+    GV -> Lake [ label="Lake"]
+    
+#-----------------------------------------------------
+#Gerudo Fortress
+GF[shape="box", label="\GF
+
+GTG
+
+Storms G
+"]
+    GF -> GVFromGF [ label="GF"]
+    GF -> WasteFromGF [ label="Waste"]
+    
+#-----------------------------------------------------
+#Haunted Wasteland
+Waste[shape="box", label="\Waste"]
+    Waste -> ColFromWaste [ label="Col"]
+    Waste -> GFFromWaste [ label="GF"]
+
+#-----------------------------------------------------
+#Desert Colossus
+Col[shape="box", label="\GF
+
+Spirit Temple
+
+Fairy
+Strength G
+"]
+    Col -> WasteFromCol [ label="Waste"]
+
+#-----------------------------------------------------
+#Lake Hylia
+
+Lake[shape="box", label="\Lake
+
+Water Temple
+
+Lab
+Fishing
+Grave
+"]
+    Lake -> FieldFromLake [ label="Field"]
+    Lake -> ZDFromLake [ label="ZD"]
+    
+#-----------------------------------------------------
+#Hyrule Castle Market
+
+Market[shape="box", label="\Market
+
+Bazaar
+Potion Shop
+Mask Shop
+Shooting
+Bowling
+Chest Game
+Chu Shop
+Back House
+"]
+    Market -> StreetFromMarket [ label="Street"]
+    Market -> OToTFromMarket [ label="OToT"]
+    Market -> CastleFromMarket [ label="Castle"]
+
+#-----------------------------------------------------
+#Hyrule Castle
+
+Castle[shape="box", label="\Market
+
+Bomb Fairy
+Strength Fairy
+Storms G
+"]
+    Castle -> MarketFromCastle [ label="Market"]
+
+#-----------------------------------------------------
+#Drawbridge Street
+
+Street[shape="box", label="\Street
+
+Pots
+"]
+    Street -> MarketFromStreet [ label="Market" ]
+    Street -> FieldFromStreet [ label="Field" ]
+
+#-----------------------------------------------------
+#Outside Temple of Time
+OToT[shape="box", label="\OToT
+
+ToT
+"]
+    OToT -> MarketFromOToT [ label="Market"]
+	
+#-----------------------------------------------------
+#Lon Lon Ranch
+
+Ranch[shape="box", label="\Ranch
+
+Stables
+House
+Back
+Open G
+"]
+	Ranch -> FieldFromRanch [ label="Field"]
+
+#-----------------------------------------------------
+#Hyrule Field
+Field[ shape="box", label="Field
+    
+NE Bomb G
+NW Bomb G
+N Bomb G
+Tree Bomb G
+W Hammer G
+SE Bomb G
+S Bomb G
+S Open G
+"]
+    
+    Field -> StreetFromField [label="Street"]
+    Field -> GVFromField [label="GV"]
+    Field -> LakeFromField [label="Lake"]
+    Field -> KokFromField [label="Kok"]
+    Field -> RanchFromField [label="Ranch"]
+    Field -> ZRFromField [label="ZR"]
+    Field -> KakFromField [label="Kak"]
+
+}
