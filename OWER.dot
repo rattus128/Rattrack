@@ -1,5 +1,11 @@
 digraph G {
 
+ToT [ shape="circle" ]
+Links [ shape="circle" ]
+
+ToT -> AdultStart
+LinksHouse -> ChildStart 
+
 #-----------------------------------------------------
 #Kakariko Village
 Kak[ shape="box", label="\Kak
@@ -25,7 +31,7 @@ Open G
 	
 #-----------------------------------------------------
 #Graveyard
-GY[ shape="box", label="\Kak
+GY[ shape="box", label="\GY
 
 Shadow
 

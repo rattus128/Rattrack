@@ -1,10 +1,14 @@
 #!/bin/bash
 
+git push origin HEAD:refs/heads/live
+
 while $(true); do
     if [ "$(git diff OWER.dot)" != "" ]; then
-        dot -Tsvg OWER.dot -o live.svg
+        gvpr -i "N[shape=='circle']" OWER.dot | \
+        dot -Tsvg -o live.svg
         git add live.svg
         git add OWER.dot
+        git commit -m "update"
         git push origin HEAD:refs/heads/live
     fi
 done
