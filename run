@@ -1,6 +1,6 @@
 #!/bin/bash
 
-git push origin HEAD:refs/heads/live
+git push -f origin HEAD:refs/heads/live
 
 while $(true); do
     if [ "$(git diff OWER.dot)" != "" ]; then
