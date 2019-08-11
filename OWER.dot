@@ -19,7 +19,7 @@ Grannys
 Bomb G
 Open G
 "]
-	Kak -> TrailFromKak [ label="Trail" ]
+	Kak -> TrailFromKak [ label="Trail"]
 	Kak -> GYFromKak [ label="GY" ]
 	Kak -> FieldFromKak [ label="Field" ]
 	
