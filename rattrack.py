@@ -11,6 +11,8 @@ def mangle_path(s):
         return s.replace("/", "\\")
     return s
 
+if platform.system() == "Windows":
+    os.environ["PATH"] += os.pathsep + mangle_path(os.path.dirname(os.path.realpath(__file__)) + "/windows/graphviz")
 sys.path.insert(0, mangle_path(os.path.dirname(os.path.realpath(__file__)) + "/python/site-packages"))
 
 import pydot
@@ -141,16 +143,10 @@ class TrackerCanvas(Canvas):
 
         graph_reduce(world, roots, "reduced.dot")
 
-        WINE_TEST=True
-
-        if platform.system() == "Windows" or \
-           platform.system() == "Linux" and WINE_TEST:
+        if platform.system() == "Windows":
             stem = os.path.dirname(os.path.realpath(__file__)) + "/windows/"
             dot_path = mangle_path(stem + "graphviz/dot.exe")
             convert_path = mangle_path(stem + "imageMagick/magick.exe")
-            if platform.system() == "Linux" and WINE_TEST:
-                dot_path = "wine " + dot_path
-                convert_path = "wine " + convert_path
         else:
             dot_path = "dot"
             convert_path = "convert"
