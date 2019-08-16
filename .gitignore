@@ -1,3 +1,4 @@
 *.dot
 *.png
 *.svg
+__pycache__

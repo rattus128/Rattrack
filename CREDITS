@@ -4,5 +4,9 @@ ImageMagick from ImageMagick Studio LLC (https://imagemagick.org/)
 
 Graphviz from the graphiv team (https://www.graphviz.org/)
 
-Refer to the LICENSE files in individual components for LICENSE
-information.
+Pydot from (https://github.com/pydot)
+
+pyparsing from Paul T. McGuire
+
+Refer to the LICENSE files or sources in individual components for
+license information.

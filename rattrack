@@ -1,11 +1,19 @@
 #!/usr/bin/python3
 
 from tkinter import *
-import pydot
 import subprocess
 import xml.etree.ElementTree
 import os
 import platform
+
+def mangle_path(s):
+    if platform.system() == "Windows":
+        return s.replace("/", "\\")
+    return s
+
+sys.path.insert(0, mangle_path(os.path.dirname(os.path.realpath(__file__)) + "/python/site-packages"))
+
+import pydot
 
 def graph_reduce(graph, roots, filename):
     r = list(roots)
@@ -138,14 +146,11 @@ class TrackerCanvas(Canvas):
         if platform.system() == "Windows" or \
            platform.system() == "Linux" and WINE_TEST:
             stem = os.path.dirname(os.path.realpath(__file__)) + "/windows/"
-            dot_path = stem + "graphviz/dot.exe"
-            convert_path = stem + "imageMagick/magick.exe"
+            dot_path = mangle_path(stem + "graphviz/dot.exe")
+            convert_path = mangle_path(stem + "imageMagick/magick.exe")
             if platform.system() == "Linux" and WINE_TEST:
                 dot_path = "wine " + dot_path
                 convert_path = "wine " + convert_path
-            else:
-                dot_path = dot_path.replace("/", "\\")
-                convert_path = convert_path.replace("/", "\\")
         else:
             dot_path = "dot"
             convert_path = "convert"
