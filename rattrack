@@ -4,6 +4,8 @@ from tkinter import *
 import pydot
 import subprocess
 import xml.etree.ElementTree
+import os
+import platform
 
 def graph_reduce(graph, roots, filename):
     r = list(roots)
@@ -114,8 +116,27 @@ class TrackerCanvas(Canvas):
 
         graph_reduce(world, roots, "reduced.dot")
 
-        subprocess.call(["dot", "-Tpng", "-o", "reduced.png", "reduced.dot"])
-        subprocess.call(["dot", "-Tsvg", "-o", "reduced.svg", "reduced.dot"])
+        WINE_TEST=True
+
+        if platform.system() == "Windows" or \
+           platform.system() == "Linux" and WINE_TEST:
+            stem = os.path.dirname(os.path.realpath(__file__)) + "/windows/"
+            dot_path = stem + "graphviz/dot.exe"
+            convert_path = stem + "imageMagick/magick.exe"
+            if platform.system() == "Linux" and WINE_TEST:
+                dot_path = "wine " + dot_path
+                convert_path = "wine " + convert_path
+            else:
+                dot_path = dot_path.replace("/", "\\")
+                convert_path = convert_path.replace("/", "\\")
+        else:
+            dot_path = "dot"
+            convert_path = "convert"
+
+        subprocess.call((dot_path + " -Tpng -o reduced.png reduced.dot").split(" "))
+        subprocess.call((convert_path + " reduced.png -channel RGB -negate reduced.png").split(" "))
+        subprocess.call((convert_path + " -brightness-contrast -10x-30 reduced.png reduced.png").split(" "))
+        subprocess.call((dot_path + " -Tsvg -o reduced.svg reduced.dot").split(" "))
 
         self.et = xml.etree.ElementTree.parse('reduced.svg').getroot()
         self.f = PhotoImage(file="reduced.png")
