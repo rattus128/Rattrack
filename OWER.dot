@@ -3,7 +3,6 @@ digraph G {
 ToT [ shape="circle" ]
 Links [ shape="circle" ]
 
-
 #-----------------------------------------------------
 #Kokiri Forest
 
@@ -19,9 +18,7 @@ Sarias
 Twins
 Storms G
 "]
-	Kokiri -> WoodsFromKokiri [ label = "Woods" ]
-	Kokiri -> BridgeFromKokiri [ label = "LW Bridge" ]
-	
+    
 #-----------------------------------------------------
 #Lost Woods
 Woods[shape="box", label="\Woods
@@ -30,19 +27,11 @@ Warp Bomb G
 SFM Bomb G
 Open G
 "]
-	Woods -> ZRiverFromWoods [ label = "Z River" ]
-	Woods -> GoronFromWoods [ label = "Goron" ]
-	Woods -> KokiriFromWoods [ label = "Kokiri" ]
-	Woods -> SFMeadowFromWoods [ label = "SF Meadow" ]
 
 #-----------------------------------------------------
 #Lost Woods
 Bridge[shape="box", label="\LW Bridge
 "]
-	Bridge -> KokiriFromBridge [ label = "Kokiri" ]
-	Bridge -> FieldFromBridge [ label = "Field" ]
-
-    Bridge -> Woods [ label = "", arrowhead="none", arrowtail="none" ]
 
 #-----------------------------------------------------
 #Sacred Forest Meadow
@@ -54,8 +43,7 @@ Bomb G
 Open G
 Storms G
 "]
-	SFMeadow -> WoodsFromSFMeadow [ label = "Woods" ]
-	
+    
 #-----------------------------------------------------
 #Death Mountain Trail
 Trail[ shape="box", label="\Trail
@@ -66,10 +54,6 @@ Fairy
 Bomb G
 Storms G
 "]
-    Trail -> GoronFromTrail [ label="Goron" ]
-    Trail -> KakarikoFromTrail [ label="Kakariko" ]
-    Trail -> CraterFromTrail [ label="Crater" ]
-    Trail -> TrailOwl [ label="Owl" ]
 
 #-----------------------------------------------------
 #Death Mountain Crater
@@ -81,8 +65,6 @@ Fairy
 Hammer G
 Bomb G
 "]
-    Crater -> GoronFromCrater  [ label="Goron" ]
-    Crater -> TrailFromCrater  [ label="Trail" ]
 
 #-----------------------------------------------------
 #Goron City
@@ -91,9 +73,6 @@ Goron[ shape="box", label="\Goron
 Shop
 Open G
 "]
-    Goron -> WoodsFromGoron [ label="Woods"]
-    Goron -> TrailFromGoron [ label="Trail"]
-    Goron -> CraterFromGoron [ label="Trail"]
 
 #-----------------------------------------------------
 #Zoras River
@@ -103,10 +82,7 @@ Storms G
 Bomb G
 Open G
 "]
-	ZRiver -> FieldFromZRiver [ label = "Field" ]
-	ZRiver -> ZDomainFromZRiver [ label = "Z Domain" ]
-	ZRiver -> WoodsFromZRiver [ label = "Woods" ]
-	
+    
 #-----------------------------------------------------
 #Zoras Domain
 ZDomain[shape="box", label="\Z Domain
@@ -114,20 +90,16 @@ ZDomain[shape="box", label="\Z Domain
 Shop
 Storms G
 "]
-	ZDomain -> ZRiverFromZDomain [ label = "Z River" ]
-	ZDomain -> ZFountainFromZDomain [ label = "Z Fountain" ]
-	ZDomain -> LakeFromZDomain [ label = "Lake"]
 
 #-----------------------------------------------------
 #Zoras Fountain
 ZFountain[shape="box", label="\Z Fountain
-	
+    
 Jabu
 Ice Cavern
 
 Fairy
 "]
-	ZFountain -> ZDomainFromZFountain [ label = "Z Domain" ]
 
 #-----------------------------------------------------
 #Lake Hylia
@@ -140,9 +112,6 @@ Lab
 Fishing
 Grave
 "]
-    Lake -> FieldFromLake [ label="Field"]
-    Lake -> ZDomainFromLake [ label="Z Domain"]
-    Lake -> LakeOwl [ label="Owl" ]
 
 #-----------------------------------------------------
 #Gerudo Valley
@@ -151,9 +120,6 @@ GValley[shape="box", label="\G Valley
 Tent
 Storms G
 "]
-    GValley -> FieldFromGValley [ label="Field"]
-    GValley -> GFortressFromGValley [ label="G Fortress"]
-    GValley -> Lake [ label="Lake"]
     
 #-----------------------------------------------------
 #Gerudo Fortress
@@ -163,14 +129,10 @@ GTG
 
 Storms G
 "]
-    GFortress -> GValleyFromGFortress [ label="G Valley"]
-    GFortress -> WastelandFromGFortress [ label="Wasteland"]
     
 #-----------------------------------------------------
 #Haunted Wasteland
 Wasteland[shape="box", label="\Wasteland"]
-    Wasteland -> ColossusFromWasteland [ label="Colossus"]
-    Wasteland -> GFortressFromWasteland [ label="G Fortress"]
 
 #-----------------------------------------------------
 #Desert Colossus
@@ -181,7 +143,6 @@ Spirit Temple
 Fairy
 Strength G
 "]
-    Colossus -> WastelandFromColossus [ label="Wasteland"]
 
 #-----------------------------------------------------
 #Hyrule Castle Market
@@ -197,9 +158,6 @@ Chest Game
 Chu Shop
 Back House
 "]
-    Market -> StreetFromMarket [ label="Street"]
-    Market -> OToTFromMarket [ label="Temple"]
-    Market -> CastleFromMarket [ label="Castle"]
 
 #-----------------------------------------------------
 #Hyrule Castle
@@ -210,7 +168,6 @@ Bomb Fairy
 Strength Fairy
 Storms G
 "]
-    Castle -> MarketFromCastle [ label="Market"]
 
 #-----------------------------------------------------
 #Drawbridge Street
@@ -219,8 +176,6 @@ Street[shape="box", label="\Street
 
 Pots
 "]
-    Street -> MarketFromStreet [ label="Market" ]
-    Street -> FieldFromStreet [ label="Field" ]
 
 #-----------------------------------------------------
 #Outside Temple of Time
@@ -228,8 +183,7 @@ OToT[shape="box", label="\Outside Temple
 
 ToT
 "]
-    OToT -> MarketFromOToT [ label="Market"]
-	
+    
 #-----------------------------------------------------
 #Hyrule Field
 Field[ shape="box", label="Field
@@ -243,14 +197,6 @@ SE Bomb G
 S Bomb G
 S Open G
 "]
-    
-    Field -> StreetFromField [label="Street"]
-    Field -> GValleyFromField [label="G Valley"]
-    Field -> LakeFromField [label="Lake"]
-    Field -> BridgeFromField [label="LW Bridge"]
-    Field -> RanchFromField [label="Ranch"]
-    Field -> ZRiverFromField [label="Z River"]
-    Field -> KakarikoFromField [label="Kakariko"]
 
 #-----------------------------------------------------
 #Kakariko Village
@@ -271,10 +217,7 @@ Grannys
 Bomb G
 Open G
 "]
-	Kakariko -> TrailFromKakariko [ label="Trail"]
-	Kakariko -> GraveyardFromKakariko [ label="Graveyard" ]
-	Kakariko -> FieldFromKakariko [ label="Field" ]
-	
+    
 #-----------------------------------------------------
 #Graveyard
 Graveyard[ shape="box", label="\Graveyard
@@ -287,7 +230,6 @@ Dampes Grave
 Suns Grave
 Royal Tomb
 "]
-    Graveyard -> KakarikoFromGraveyard [ label="Kakariko" ]
 
 #-----------------------------------------------------
 #Lon Lon Ranch
@@ -299,7 +241,63 @@ House
 Back
 Open G
 "]
-	Ranch -> FieldFromRanch [ label="Field"]
+
+Kokiri -> WoodsFromKokiri [ label = "Woods" ]
+Kokiri -> BridgeFromKokiri [ label = "LW Bridge" ]
+Woods -> ZRiverFromWoods [ label = "Z River" ]
+Woods -> GoronFromWoods [ label = "Goron" ]
+Woods -> KokiriFromWoods [ label = "Kokiri" ]
+Woods -> SFMeadowFromWoods [ label = "SF Meadow" ]
+Bridge -> KokiriFromBridge [ label = "Kokiri" ]
+Bridge -> FieldFromBridge [ label = "Field" ]
+Bridge -> Woods [ label = "", arrowhead="none", arrowtail="none" ]
+SFMeadow -> WoodsFromSFMeadow [ label = "Woods" ]
+Trail -> GoronFromTrail [ label="Goron" ]
+Trail -> KakarikoFromTrail [ label="Kakariko" ]
+Trail -> CraterFromTrail [ label="Crater" ]
+Trail -> TrailOwl [ label="Owl" ]
+Crater -> GoronFromCrater  [ label="Goron" ]
+Crater -> TrailFromCrater  [ label="Trail" ]
+Goron -> WoodsFromGoron [ label="Woods"]
+Goron -> TrailFromGoron [ label="Trail"]
+Goron -> CraterFromGoron [ label="Trail"]
+ZRiver -> FieldFromZRiver [ label = "Field" ]
+ZRiver -> ZDomainFromZRiver [ label = "Z Domain" ]
+ZRiver -> WoodsFromZRiver [ label = "Woods" ]
+ZDomain -> ZRiverFromZDomain [ label = "Z River" ]
+ZDomain -> ZFountainFromZDomain [ label = "Z Fountain" ]
+ZDomain -> LakeFromZDomain [ label = "Lake"]
+ZFountain -> ZDomainFromZFountain [ label = "Z Domain" ]
+Lake -> FieldFromLake [ label="Field"]
+Lake -> ZDomainFromLake [ label="Z Domain"]
+Lake -> LakeOwl [ label="Owl" ]
+GValley -> FieldFromGValley [ label="Field"]
+GValley -> GFortressFromGValley [ label="G Fortress"]
+GValley -> Lake [ label="Lake"]
+GFortress -> GValleyFromGFortress [ label="G Valley"]
+GFortress -> WastelandFromGFortress [ label="Wasteland"]
+Wasteland -> ColossusFromWasteland [ label="Colossus"]
+Wasteland -> GFortressFromWasteland [ label="G Fortress"]
+Colossus -> WastelandFromColossus [ label="Wasteland"]
+Market -> StreetFromMarket [ label="Street"]
+Market -> OToTFromMarket [ label="Temple"]
+Market -> CastleFromMarket [ label="Castle"]
+Castle -> MarketFromCastle [ label="Market"]
+Street -> MarketFromStreet [ label="Market" ]
+Street -> FieldFromStreet [ label="Field" ]
+OToT -> MarketFromOToT [ label="Market"]
+Field -> StreetFromField [label="Street"]
+Field -> GValleyFromField [label="G Valley"]
+Field -> LakeFromField [label="Lake"]
+Field -> BridgeFromField [label="LW Bridge"]
+Field -> RanchFromField [label="Ranch"]
+Field -> ZRiverFromField [label="Z River"]
+Field -> KakarikoFromField [label="Kakariko"]
+Kakariko -> TrailFromKakariko [ label="Trail"]
+Kakariko -> GraveyardFromKakariko [ label="Graveyard" ]
+Kakariko -> FieldFromKakariko [ label="Field" ]
+Graveyard -> KakarikoFromGraveyard [ label="Kakariko" ]
+Ranch -> FieldFromRanch [ label="Field"]
 
 TrailFromKakariko [ shape="circle", label="?" ]
 GraveyardFromKakariko [ shape="circle", label="?" ]
