@@ -186,7 +186,7 @@ class TrackerCanvas(Canvas):
 
     def drag(self, event):
         self.delete(self.find_withtag('line'))
-        self.create_line(self.startx, self.starty, event.x, event.y, arrow=BOTH, width=3, tag='line')
+        self.create_line(self.startx, self.starty, event.x, event.y, arrow=BOTH, width=3, tag='line', fill="blue")
 
     def stopDrag(self, event):
         self.delete(self.find_withtag('line'))
