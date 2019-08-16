@@ -1,0 +1,8 @@
+Rattrack uses the following third party open source compenents:
+
+ImageMagick from ImageMagick Studio LLC (https://imagemagick.org/)
+
+Graphviz from the graphiv team (https://www.graphviz.org/)
+
+Refer to the LICENSE files in individual components for LICENSE
+information.
