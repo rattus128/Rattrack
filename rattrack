@@ -52,6 +52,23 @@ def graph_reduce(graph, roots, filename):
 
 roots = [ "Links", "ToT" ]
 
+class TextWindow(object):
+    def __init__(self, master, node, canvas):
+        self.node = node
+        self.canvas = canvas
+        top = self.top = Toplevel(master)
+        top.title("region notes")
+        t = self.t = Text(top, width=40, height=12)
+        t.insert('1.0', node.get("label")[1:-2])
+        self.t.pack()
+        self.b = Button(top, text='Ok', command=self.finish)
+        self.b.pack()
+
+    def finish(self):
+        self.node.set("label", "\"" + self.t.get('1.0', 'end') + "\"")
+        self.top.destroy()
+        self.canvas.redraw()
+
 class TrackerCanvas(Canvas):
 
     def __init__(self, window):
@@ -175,13 +192,19 @@ class TrackerCanvas(Canvas):
         self.do_connection(start, finish)
 
     def do_connection_unidirectional(self, a, b):
-        if a is None or b is None or a == b:
+        if a is None or b is None:
             return False
         an = world.get_node(a)[0]
         bn = world.get_node(b)[0]
+        if      a == b and \
+                an.get("shape") == "\"box\"":
+                popup = TextWindow(window, an, self)
+                self.window.wait_window(popup.top)
+                return True
         if      an.get("shape") == "\"circle\"" and \
                 an.get("label") == "\"?\"":
-            if  bn.get("shape") != "\"circle\"" or \
+            if  a == b or \
+                bn.get("shape") != "\"circle\"" or \
                 bn.get("label") != "\"?\"":
                 return False
             a_region = None
