@@ -173,6 +173,8 @@ class TrackerCanvas(Canvas):
                 def add_command(name):
                     popup.add_command(label=n.get_name(), command = lambda : self.add_root(name))
                 add_command(n.get_name())
+        popup.add_separator()
+        popup.add_command(label="Cancel")
         try:
             popup.tk_popup(event.x_root, event.y_root, 0)
         finally:
