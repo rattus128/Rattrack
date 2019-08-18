@@ -6,6 +6,8 @@ import xml.etree.ElementTree
 import os
 import platform
 
+FOREGROUND_COLOR="#686868"
+
 def mangle_path(s):
     if platform.system() == "Windows":
         return s.replace("/", "\\")
@@ -25,6 +27,7 @@ def graph_reduce(graph, roots, filename):
 
     (g,)=pydot.graph_from_dot_file(filename)
     g.set("rankdir", "LR")
+    g.set("bgcolor", "#181818")
     gdict = { n.get_name() : [] for n in g.get_node_list() }
 
     for edge in g.get_edge_list():
@@ -43,6 +46,10 @@ def graph_reduce(graph, roots, filename):
         addRoots(gdict[root])
 
     for edge in g.get_edge_list():
+        if edge.get("color") is None:
+            edge.set("color", FOREGROUND_COLOR)
+        if edge.get("fontcolor") is None:
+            edge.set("fontcolor", FOREGROUND_COLOR)
         source = edge.get_source()
         dest   = edge.get_destination()
         if (not source in r) and (not dest in r):
@@ -51,6 +58,10 @@ def graph_reduce(graph, roots, filename):
             raise Exception("Edge half attached to root nodes")
 
     for node in g.get_node_list():
+        if node.get("color") is None:
+            node.set("color", FOREGROUND_COLOR)
+        if node.get("fontcolor") is None:
+            node.set("fontcolor", FOREGROUND_COLOR)
         if not node.get_name() in r:
             g.del_node(node.get_name())
 
@@ -78,6 +89,12 @@ class TextWindow(object):
         self.node.set("label", "\"" + self.t.get('1.0', 'end') + "\"")
         self.top.destroy()
         self.canvas.redraw()
+
+def new_edge(a_region, b_region):
+    edge = pydot.Edge(a_region, b_region)
+    edge.set("color", FOREGROUND_COLOR)
+    edge.set("fontcolor", FOREGROUND_COLOR)
+    return edge
 
 class TrackerCanvas(Canvas):
 
@@ -146,14 +163,10 @@ class TrackerCanvas(Canvas):
         if platform.system() == "Windows":
             stem = os.path.dirname(os.path.realpath(__file__)) + "/windows/"
             dot_path = mangle_path(stem + "graphviz/dot.exe")
-            convert_path = mangle_path(stem + "imageMagick/magick.exe")
         else:
             dot_path = "dot"
-            convert_path = "convert"
 
         subprocess.call((dot_path + " -Tpng -o reduced.png reduced.dot").split(" "))
-        subprocess.call((convert_path + " reduced.png -channel RGB -negate reduced.png").split(" "))
-        subprocess.call((convert_path + " -brightness-contrast -10x-30 reduced.png reduced.png").split(" "))
         subprocess.call((dot_path + " -Tsvg -o reduced.svg reduced.dot").split(" "))
 
         self.et = xml.etree.ElementTree.parse('reduced.svg').getroot()
@@ -222,7 +235,7 @@ class TrackerCanvas(Canvas):
                 if edge.get_destination() == b:
                     b_label = edge.get("label")
                     b_region = edge.get_source()
-            connector = pydot.Edge(a_region, b_region)
+            connector = new_edge(a_region, b_region)
             connector.set("taillabel", a_label)
             connector.set("headlabel", b_label)
             connector.set("headlabel", b_label)
@@ -241,7 +254,7 @@ class TrackerCanvas(Canvas):
                 if edge.get_destination() == a:
                     a_label = edge.get("label")
                     a_region = edge.get_source()
-            connector = pydot.Edge(a_region, b)
+            connector = new_edge(a_region, b)
             connector.set("label", "Owl")
             world.del_edge(a_region, a)
             world.add_edge(connector)
@@ -249,7 +262,7 @@ class TrackerCanvas(Canvas):
             return True
         elif    an.get("shape") == "\"circle\"" and \
                 bn.get("shape") == "\"box\"":
-            connector = pydot.Edge(a, b)
+            connector = new_edge(a, b)
             world.add_edge(connector)
             self.redraw()
             return True
