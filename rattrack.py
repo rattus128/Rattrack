@@ -72,6 +72,9 @@ def graph_reduce(graph, roots, filename):
 (world,)=pydot.graph_from_dot_file("OWER.dot")
 
 roots = [ "Links", "ToT" ]
+edges = {}
+for node in world.get_node_list():
+    edges[node.get_name()] = []
 
 class TextWindow(object):
     def __init__(self, master, node, canvas):
@@ -90,10 +93,25 @@ class TextWindow(object):
         self.top.destroy()
         self.canvas.redraw()
 
-def new_edge(a_region, b_region):
+def new_edge(a_region, b_region, replaces, headlabel=None, taillabel=None):
     edge = pydot.Edge(a_region, b_region)
     edge.set("color", FOREGROUND_COLOR)
     edge.set("fontcolor", FOREGROUND_COLOR)
+    edge_data = { "active" : True, "edge":edge, "replaces" : replaces }
+    edges[a_region].append(edge_data)
+    edges[b_region].append(edge_data)
+    name = a_region
+    if taillabel is not None:
+        name += ":" + taillabel
+        edge.set("taillabel", taillabel)
+    name += " <-> " + b_region
+    if headlabel is not None:
+        name += ":" + headlabel
+        edge.set("headlabel", headlabel)
+    edge.set("name", name)
+    world.add_edge(edge)
+    for replace in replaces:
+        world.del_edge(replace)
     return edge
 
 class TrackerCanvas(Canvas):
@@ -109,6 +127,10 @@ class TrackerCanvas(Canvas):
 
     def add_root(self, r):
         roots.append(r)
+        self.redraw()
+
+    def del_root(self, r):
+        roots.remove(r)
         self.redraw()
 
     def svg_get_clicked_thing(self, x, y):
@@ -178,15 +200,60 @@ class TrackerCanvas(Canvas):
         self.config(width=self.width, height=self.height)
         self.create_image(0, 0, anchor=NW, image=self.f)
         self.pack()
-    
+
+    def del_edge(self, edge_data):
+        #Just leak it
+        edge_data["active"] = False;
+        world.del_edge(edge_data["edge"])
+        for replace in edge_data["replaces"]:
+            world.add_edge(replace)
+        self.redraw()
+
+    def name_del(self, label, clicked):
+        for piece in label.split(" <-> "):
+            try:
+                subpieces = piece.split(":")
+                if subpieces[0] == clicked:
+                    return "disconnect " + subpieces[1] + " exit"
+            except:
+                pass
+        if label.split(" <-> ")[1] == clicked:
+            return "disconnect " + label.split(" <-> ")[0]
+        return None
+
     def menu(self, event):
         popup = Menu(window, tearoff=0)
-        for n in world.get_node_list():
-            if not n.get_name() in roots and n.get("label") != "\"?\"" and \
-                                             n.get("label") != "\"Owl?\"":
-                def add_command(name):
-                    popup.add_command(label=n.get_name(), command = lambda : self.add_root(name))
-                add_command(n.get_name())
+        space = True
+
+        clicked = self.svg_get_clicked_thing(event.x, event.y)
+        if clicked is not None:
+            clickedn = world.get_node(clicked)[0]
+            if clickedn.get("shape") == "\"box\"":
+                space = False
+                connected_to_something = False
+                for edge_data in edges[clicked]:
+                    if edge_data["active"]:
+                        d = self.name_del(edge_data["edge"].get("name"), clicked)
+                        def add_del_command(edge_data):
+                            popup.add_command(label=d, command = lambda : self.del_edge(edge_data))
+                        if d is not None:
+                            add_del_command(edge_data)
+                            connected_to_something = True
+                if not connected_to_something:
+                    if not clicked in roots:
+                        return
+                    def add_remove_command(name):
+                        popup.add_command(label="remove", command = lambda : self.del_root(name))
+                    add_remove_command(clicked)
+
+        if space:
+            for n in world.get_node_list():
+                if not n.get_name() in roots and n.get("label") != "\"?\"" and \
+                                                 n.get("label") != "\"Owl?\"":
+                    def add_command(name):
+                        popup.add_command(label=n.get_name(), command = lambda : self.add_root(name))
+                    add_command(n.get_name())
+
         popup.add_separator()
         popup.add_command(label="Cancel")
         try:
@@ -228,23 +295,20 @@ class TrackerCanvas(Canvas):
             b_region = None
             a_label = None
             b_label = None
+            replaces = []
             for edge in world.get_edge_list():
                 if edge.get_destination() == a:
                     a_label = edge.get("label")
                     a_region = edge.get_source()
+                    replaces.append(edge)
                 if edge.get_destination() == b:
                     b_label = edge.get("label")
                     b_region = edge.get_source()
-            connector = new_edge(a_region, b_region)
-            connector.set("taillabel", a_label)
-            connector.set("headlabel", b_label)
-            connector.set("headlabel", b_label)
+                    replaces.append(edge)
+            connector = new_edge(a_region, b_region, replaces, taillabel=a_label, headlabel=b_label)
             connector.set("arrowhead", "\"none\"")
             connector.set("arrowtail", "\"none\"")
             connector.set("minlen", "2.0")
-            world.add_edge(connector)
-            world.del_edge(a_region, a)
-            world.del_edge(b_region, b)
             self.redraw()
             return True
         elif    an.get("shape") == "\"circle\"" and \
@@ -254,16 +318,13 @@ class TrackerCanvas(Canvas):
                 if edge.get_destination() == a:
                     a_label = edge.get("label")
                     a_region = edge.get_source()
-            connector = new_edge(a_region, b)
-            connector.set("label", "Owl")
-            world.del_edge(a_region, a)
-            world.add_edge(connector)
+                    a_edge = edge
+            connector = new_edge(a_region, b, [a_edge], taillabel="Owl")
             self.redraw()
             return True
         elif    an.get("shape") == "\"circle\"" and \
                 bn.get("shape") == "\"box\"":
-            connector = new_edge(a, b)
-            world.add_edge(connector)
+            connector = new_edge(a, b, [])
             self.redraw()
             return True
         else:

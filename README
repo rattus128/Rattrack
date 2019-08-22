@@ -15,10 +15,11 @@ Step 4: Double-click the Gui.py it may say just say Gui - Again just double-clic
 Usage:
 
 Right click to add overworld regions to the tracker
-Drag links house or Temple of Time ("ToT") to starting overworld
-Drag between two "?" circle to make an overworld connection
-Drag owls to regions to connect them
+Drag links house or Temple of Time ("ToT") to an overworld region
+Drag between two "?" circles to make an overworld connection between two regions
+Drag owls to a region to connect them
 Click on regions to edit the region notes
+Right click on regions for undo commands
 
 Advanced:
 
