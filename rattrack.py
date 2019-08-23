@@ -72,7 +72,12 @@ def graph_reduce(graph, roots, filename):
 (world,)=pydot.graph_from_dot_file("OWER.dot")
 
 def unparse_interiors(interiors):
-    ret = interiors["title"] + "\n"
+    ret = interiors["title"]
+    if (interiors["woth"].get()):
+        ret += " (Hero)"
+    if (interiors["fool"].get()):
+        ret += " (Fool)"
+    ret += "\n"
     for segment in interiors["segments"]:
         ret += "\n"
         for interior in segment:
@@ -91,7 +96,11 @@ def parse_interiors(text):
     segment = None;
     for line in [ line_unstripped.strip("\"") for line_unstripped in text.splitlines()]:
         if ret is None:
-            ret = { "title" : line, "segments" : [] }
+            woth = IntVar()
+            woth.set(0)
+            fool = IntVar()
+            fool.set(0)
+            ret = { "title" : line, "segments" : [], "woth" : woth, "fool" : fool }
             continue
         if line:
             checked = IntVar()
@@ -150,6 +159,16 @@ class TextWindow(object):
                 row += 1
             top.grid_rowconfigure(row, minsize=20)
             row += 1
+
+        #OOTR specific
+        woth = Checkbutton(top, text="Way of the Hero", variable = interiors["woth"])
+        fool = Checkbutton(top, text="A Foolish Choice", variable = interiors["fool"])
+        woth.grid(row=row, column=0, columnspan=3, sticky=W)
+        row += 1
+        fool.grid(row=row, column=0, columnspan=3, sticky=W)
+        row += 1
+        top.grid_rowconfigure(row, minsize=20)
+        row += 1
 
         ok = Button(top, text='Ok', command=self.finish)
         ok.grid(row=row, column=0, columnspan=3)
