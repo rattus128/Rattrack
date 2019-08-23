@@ -6,7 +6,7 @@ Links [ shape="circle", color = "forestgreen" ]
 #-----------------------------------------------------
 #Kokiri Forest
 
-Kokiri[ shape="box", color="forestgreen", label="\Kokiri
+Kokiri[ shape="box", color="forestgreen", label="Kokiri
 
 Deku Tree
 
@@ -18,10 +18,10 @@ Sarias
 Twins
 Storms G
 "]
-    
+
 #-----------------------------------------------------
 #Lost Woods
-Woods[shape="box", color="forestgreen", label="\Woods
+Woods[shape="box", color="forestgreen", label="Woods
 
 Warp Bomb G
 SFM Bomb G
@@ -30,12 +30,12 @@ Open G
 
 #-----------------------------------------------------
 #Lost Woods Bridge
-Bridge[shape="box", color="forestgreen", label="\LW Bridge
+Bridge[shape="box", color="forestgreen", label="LW Bridge
 "]
 
 #-----------------------------------------------------
 #Sacred Forest Meadow
-SFMeadow[shape="box", color="forestgreen", label="\SF Meadow
+SFMeadow[shape="box", color="forestgreen", label="SF Meadow
 
 Forest Temple
 
@@ -43,10 +43,10 @@ Bomb G
 Open G
 Storms G
 "]
-    
+
 #-----------------------------------------------------
 #Death Mountain Trail
-Trail[ shape="box", color="red", label="\Trail
+Trail[ shape="box", color="red", label="Trail
 
 Dodongos
 
@@ -57,7 +57,7 @@ Storms G
 
 #-----------------------------------------------------
 #Death Mountain Crater
-Crater[ shape="box", color="red", label="\Crater
+Crater[ shape="box", color="red", label="Crater
 
 Fire Temple
 
@@ -68,7 +68,7 @@ Bomb G
 
 #-----------------------------------------------------
 #Goron City
-Goron[ shape="box", color="red", label="\Goron
+Goron[ shape="box", color="red", label="Goron
 
 Shop
 Open G
@@ -76,16 +76,16 @@ Open G
 
 #-----------------------------------------------------
 #Zoras River
-ZRiver[shape="box", color="blue", label="\Z River
+ZRiver[shape="box", color="blue", label="Z River
 
 Storms G
 Bomb G
 Open G
 "]
-    
+
 #-----------------------------------------------------
 #Zoras Domain
-ZDomain[shape="box", color="blue", label="\Z Domain
+ZDomain[shape="box", color="blue", label="Z Domain
 
 Shop
 Storms G
@@ -93,8 +93,8 @@ Storms G
 
 #-----------------------------------------------------
 #Zoras Fountain
-ZFountain[shape="box", color="blue", label="\Z Fountain
-    
+ZFountain[shape="box", color="blue", label="Z Fountain
+
 Jabu
 Ice Cavern
 
@@ -104,7 +104,7 @@ Fairy
 #-----------------------------------------------------
 #Lake Hylia
 
-Lake[shape="box", color="cyan", label="\Lake
+Lake[shape="box", color="cyan", label="Lake
 
 Water Temple
 
@@ -115,28 +115,28 @@ Grave
 
 #-----------------------------------------------------
 #Gerudo Valley
-GValley[shape="box", color="yellow", label="\G Valley
+GValley[shape="box", color="yellow", label="G Valley
 
 Tent
 Storms G
 "]
-    
+
 #-----------------------------------------------------
 #Gerudo Fortress
-GFortress[shape="box", color="yellow", label="\G Fortress
+GFortress[shape="box", color="yellow", label="G Fortress
 
 GTG
 
 Storms G
 "]
-    
+
 #-----------------------------------------------------
 #Haunted Wasteland
-Wasteland[shape="box", color="yellow", label="\Wasteland"]
+Wasteland[shape="box", color="yellow", label="Wasteland"]
 
 #-----------------------------------------------------
 #Desert Colossus
-Colossus[shape="box", color="yellow", label="\Colossus
+Colossus[shape="box", color="yellow", label="Colossus
 
 Spirit Temple
 
@@ -147,7 +147,7 @@ Strength G
 #-----------------------------------------------------
 #Hyrule Castle Market
 
-Market[shape="box", color="white", label="\Market
+Market[shape="box", color="white", label="Market
 
 Bazaar
 Potion Shop
@@ -162,7 +162,7 @@ Back House
 #-----------------------------------------------------
 #Hyrule Castle
 
-Castle[shape="box",  color="white", label="\Castle
+Castle[shape="box",  color="white", label="Castle
 
 Bomb Fairy
 Strength Fairy
@@ -172,22 +172,22 @@ Storms G
 #-----------------------------------------------------
 #Drawbridge Street
 
-Street[shape="box", color="white", label="\Street
+Street[shape="box", color="white", label="Street
 
 Pots
 "]
 
 #-----------------------------------------------------
 #Outside Temple of Time
-OToT[shape="box", color="white", label="\Outside Temple
+OToT[shape="box", color="white", label="Outside Temple
 
 ToT
 "]
-    
+
 #-----------------------------------------------------
 #Hyrule Field
 Field[ shape="box", color="darkgreen", label="Field
-    
+
 NE Bomb G
 NW Bomb G
 N Bomb G
@@ -200,7 +200,7 @@ S Open G
 
 #-----------------------------------------------------
 #Kakariko Village
-Kakariko[ shape="box", color="orange", label="\Kakariko
+Kakariko[ shape="box", color="orange", label="Kakariko
 
 Well
 
@@ -217,10 +217,10 @@ Grannys
 Bomb G
 Open G
 "]
-    
+
 #-----------------------------------------------------
 #Graveyard
-Graveyard[ shape="box", color="orange", label="\Graveyard
+Graveyard[ shape="box", color="orange", label="Graveyard
 
 Shadow
 
@@ -234,7 +234,7 @@ Royal Tomb
 #-----------------------------------------------------
 #Lon Lon Ranch
 
-Ranch[shape="box", color="darkgreen", label="\Ranch
+Ranch[shape="box", color="darkgreen", label="Ranch
 
 Stables
 House

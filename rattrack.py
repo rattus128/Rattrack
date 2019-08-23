@@ -71,25 +71,91 @@ def graph_reduce(graph, roots, filename):
 
 (world,)=pydot.graph_from_dot_file("OWER.dot")
 
+def unparse_interiors(interiors):
+    ret = interiors["title"] + "\n"
+    for segment in interiors["segments"]:
+        ret += "\n"
+        for interior in segment:
+            if interior["checked"].get():
+                continue
+            ret += interior["name"]
+            if interior["notes"].get():
+                ret += " : " + interior["notes"].get()
+            else:
+                ret += " ?"
+            ret += "\n"
+    return ret
+
+def parse_interiors(text):
+    ret = None;
+    segment = None;
+    for line in [ line_unstripped.strip("\"") for line_unstripped in text.splitlines()]:
+        if ret is None:
+            ret = { "title" : line, "segments" : [] }
+            continue
+        if line:
+            checked = IntVar()
+            checked.set(0)
+            notes = StringVar()
+            notes.set("")
+            segment.append({ "checked" : checked, "name" : line, "notes" : notes })
+        else:
+            if segment is not None:
+                ret["segments"].append(segment)
+            segment = []
+    if segment and len(segment) != 0:
+        ret["segments"].append(segment)
+    return ret
+
+window = Tk()
+window.title("Rattrack")
+
 roots = [ "Links", "ToT" ]
 edges = {}
+interiorss = {}
+
 for node in world.get_node_list():
     edges[node.get_name()] = []
+    if node.get("shape") == "\"box\"":
+        interiors = parse_interiors(node.get("label"))
+        node.set("label", unparse_interiors(interiors))
+        interiorss[node.get_name()] = interiors
 
 class TextWindow(object):
     def __init__(self, master, node, canvas):
         self.node = node
         self.canvas = canvas
         top = self.top = Toplevel(master)
-        top.title("region notes")
-        t = self.t = Text(top, width=40, height=12)
-        t.insert('1.0', node.get("label")[1:-2])
-        self.t.pack()
-        self.b = Button(top, text='Ok', command=self.finish)
-        self.b.pack()
+        top.protocol("WM_DELETE_WINDOW", self.finish)
+
+        self.interiors = interiors = interiorss[node.get_name()]
+        top.title(interiors["title"])
+
+        checkedlabel = Label(top, text = "Cleared")
+        interiorlabel = Label(top, text = "Interior")
+        noteslabel = Label(top, text = "Notes")
+        checkedlabel.grid(row=0, column=1, padx=15, pady=15)
+        interiorlabel.grid(row=0, column=0, padx=15, pady=15, sticky=W)
+        noteslabel.grid(row=0, column=2, padx=15, pady=15)
+
+        row = 1
+        for segment in interiors["segments"]:
+            for interior in segment:
+                checkbutton = Checkbutton(top, variable = interior["checked"])
+                label = Label(top, text = interior["name"])
+                notes = Entry(top, textvariable = interior["notes"])
+                checkbutton.grid(row=row, column=1, padx=15)
+                label.grid(row=row, column=0, padx=15, sticky=W)
+                notes.grid(row=row, column=2, padx=15)
+                row += 1
+            top.grid_rowconfigure(row, minsize=20)
+            row += 1
+
+        ok = Button(top, text='Ok', command=self.finish)
+        ok.grid(row=row, column=0, columnspan=3)
 
     def finish(self):
-        self.node.set("label", "\"" + self.t.get('1.0', 'end') + "\"")
+        self.node.set("label", unparse_interiors(self.interiors))
         self.top.destroy()
         self.canvas.redraw()
 
@@ -251,7 +317,8 @@ class TrackerCanvas(Canvas):
                 if not n.get_name() in roots and n.get("label") != "\"?\"" and \
                                                  n.get("label") != "\"Owl?\"":
                     def add_command(name):
-                        popup.add_command(label=n.get_name(), command = lambda : self.add_root(name))
+                        popup.add_command(label=interiorss[n.get_name()]["title"], \
+                                          command = lambda : self.add_root(name))
                     add_command(n.get_name())
 
         popup.add_separator()
@@ -333,9 +400,6 @@ class TrackerCanvas(Canvas):
     def do_connection(self, a, b):
         if (not self.do_connection_unidirectional(a, b)) :
             self.do_connection_unidirectional(b, a)
-
-window = Tk()
-window.title("Rattrack")
 
 TrackerCanvas(window)
 
