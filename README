@@ -1,16 +1,8 @@
 Installation:
 
-Step 1: Download Python 3.6+ https://www.python.org/downloads/ Hit the yellow Download button. Then proceed to install Python. 
-When installing Python, choose Customize installation 
-In Optional Features make sure to check 
-- tcl/tk and IDLE 
-- py launcher 
-And in Advanced Options make sure to check 
-- Add Python to environment variables 
-- Associate files with Python
-
-Step 2: Extract/Unzip the Rattrack-master folder out of the zip file to your desktop or wherever you desire. Just make sure to unzip it. 
-Step 4: Double-click the Gui.py it may say just say Gui - Again just double-click that file to start up the tracker interface. 
+1. Download the latest from the releases page: <blah>
+2. Unzip somewhere
+3. Double click "rattrack" (or rattrack.exe)
 
 Usage:
 
@@ -23,4 +15,4 @@ Right click on regions for undo commands
 
 Advanced:
 
-Edit OWER.dot to change default region notes (currently interior checklists)
+Edit OWER.dot to change game data
