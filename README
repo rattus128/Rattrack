@@ -1,25 +1,28 @@
-Installation:
+Download:
 
-1. Download the latest version from the releases page: https://github.com/rattus128/Rattrack/releases
-2. Unzip somewhere
-3. Double click "rattrack" (or rattrack.exe)
+You can find the latest version at: https://github.com/rattus128/Rattrack/releases
+Select "Source Code (zip)" and download
+
+Installation and Run:
+
+1. Unzip downloaded zip file (anywhere is fine)
+2. Double click "rattrack" (or rattrack.exe)
 
 Usage:
 
-Right click to add overworld regions to the tracker
-Drag links house or Temple of Time ("ToT") to an overworld region
-Drag between two "?" circles to make an overworld connection between two regions
-Drag owls to a region to connect them
-Click on regions to edit the region notes
-Right click on regions for undo commands
+- Right click to add overworld regions to the tracker
+- Drag links house or Temple of Time ("ToT") to an overworld region
+- Drag between two "?" circles to make an overworld connection between two regions
+- Drag owls to a region to connect them
+- Click on regions to edit the region notes
+- Right click on regions for undo commands
 
 Advanced:
 
 Edit OWER.dot to change game data
 
-Linux installation:
+Linux Installation:
 
-1. Download the latest version from the releases page: https://github.com/rattus128/Rattrack/releases
-2. Unzip somewhere
-3. Install python3.6+ and graphviz from your package manager
-4. run rattrack.py
+1. Install python3.6+ and graphviz from your package manager
+2. Unzip downloaded zip file
+3. run rattrack.py
