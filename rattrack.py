@@ -6,7 +6,7 @@ import xml.etree.ElementTree
 import os
 import platform
 
-FOREGROUND_COLOR="#686868"
+FOREGROUND_COLOR="#787878"
 
 def mangle_path(s):
     if platform.system() == "Windows":
