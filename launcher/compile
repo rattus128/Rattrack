@@ -5,4 +5,5 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 (
     cd $DIR
     x86_64-w64-mingw32-gcc --static -o ../rattrack.exe rattrack.c
+    wine rcedit-x64.exe ../rattrack.exe --set-icon oot.ico 
 )
