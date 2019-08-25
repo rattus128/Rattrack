@@ -6,7 +6,8 @@ import xml.etree.ElementTree
 import os
 import platform
 
-FOREGROUND_COLOR="#787878"
+FORE_COLOR="#909090"
+EDGE_COLOR="#606060"
 
 def mangle_path(s):
     if platform.system() == "Windows":
@@ -47,9 +48,9 @@ def graph_reduce(graph, roots, filename):
 
     for edge in g.get_edge_list():
         if edge.get("color") is None:
-            edge.set("color", FOREGROUND_COLOR)
+            edge.set("color", EDGE_COLOR)
         if edge.get("fontcolor") is None:
-            edge.set("fontcolor", FOREGROUND_COLOR)
+            edge.set("fontcolor", FORE_COLOR)
         source = edge.get_source()
         dest   = edge.get_destination()
         if (not source in r) and (not dest in r):
@@ -59,9 +60,9 @@ def graph_reduce(graph, roots, filename):
 
     for node in g.get_node_list():
         if node.get("color") is None:
-            node.set("color", FOREGROUND_COLOR)
+            node.set("color", FORE_COLOR)
         if node.get("fontcolor") is None:
-            node.set("fontcolor", FOREGROUND_COLOR)
+            node.set("fontcolor", FORE_COLOR)
         if not node.get_name() in r:
             g.del_node(node.get_name())
 
@@ -180,8 +181,8 @@ class TextWindow(object):
 
 def new_edge(a_region, b_region, replaces, headlabel=None, taillabel=None):
     edge = pydot.Edge(a_region, b_region)
-    edge.set("color", FOREGROUND_COLOR)
-    edge.set("fontcolor", FOREGROUND_COLOR)
+    edge.set("color", EDGE_COLOR)
+    edge.set("fontcolor", FORE_COLOR)
     edge_data = { "active" : True, "edge":edge, "replaces" : replaces }
     edges[a_region].append(edge_data)
     edges[b_region].append(edge_data)
