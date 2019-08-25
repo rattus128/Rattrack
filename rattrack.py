@@ -273,11 +273,11 @@ class TrackerCanvas(Canvas):
         else:
             dot_path = "dot"
 
-        subprocess.call((dot_path + " -Tpng -o reduced.png reduced.dot").split(" "))
+        subprocess.call((dot_path + " -Tpng -o " + mangle_path("docs/reduced.png") + " reduced.dot").split(" "))
         subprocess.call((dot_path + " -Tsvg -o reduced.svg reduced.dot").split(" "))
 
         self.et = xml.etree.ElementTree.parse('reduced.svg').getroot()
-        self.f = PhotoImage(file="reduced.png")
+        self.f = PhotoImage(file=mangle_path("docs/reduced.png"))
         self.width = self.f.width()
         self.height = self.f.height()
 
