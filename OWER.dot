@@ -17,6 +17,9 @@ Links
 Sarias
 Twins
 Storms G
+
+Sword
+Skulls:***
 "]
 
 #-----------------------------------------------------
@@ -26,11 +29,19 @@ Woods[shape="box", color="forestgreen", label="Woods
 Warp Bomb G
 SFM Bomb G
 Open G
+
+Target
+Ocarina
+Skull Kid
+Scrubs:***
+Skulls:***
 "]
 
 #-----------------------------------------------------
 #Lost Woods Bridge
 Bridge[shape="box", color="forestgreen", label="LW Bridge
+
+Gift from Saria
 "]
 
 #-----------------------------------------------------
@@ -42,6 +53,10 @@ Forest Temple
 Bomb G
 Open G
 Storms G
+
+Song From Saria
+Song from Sheik
+Skulls:*
 "]
 
 #-----------------------------------------------------
@@ -53,6 +68,11 @@ Dodongos
 Fairy
 Bomb G
 Storms G
+
+DC roof
+Biggoron
+Bomb Alcove
+Skulls:****
 "]
 
 #-----------------------------------------------------
@@ -64,6 +84,11 @@ Fire Temple
 Fairy
 Hammer G
 Bomb G
+
+Volcano
+Cliff
+Scrub
+Skulls:**
 "]
 
 #-----------------------------------------------------
@@ -72,6 +97,13 @@ Goron[ shape="box", color="red", label="Goron
 
 Shop
 Open G
+
+Link the Goron
+Hot Rodder
+Darunia
+Spinning Pot
+Skulls:**
+Chests:***
 "]
 
 #-----------------------------------------------------
@@ -81,6 +113,12 @@ ZRiver[shape="box", color="blue", label="Z River
 Storms G
 Bomb G
 Open G
+
+Frogs in Rain
+Frogs Final Reward
+Bean Sales
+PoH x2:**
+Skulls:****
 "]
 
 #-----------------------------------------------------
@@ -89,6 +127,11 @@ ZDomain[shape="box", color="blue", label="Z Domain
 
 Shop
 Storms G
+
+Diving
+Torches
+Unfreeze
+Skull
 "]
 
 #-----------------------------------------------------
@@ -99,6 +142,10 @@ Jabu
 Ice Cavern
 
 Fairy
+
+Free PoH
+Under Water PoH
+Skulls:***
 "]
 
 #-----------------------------------------------------
@@ -111,6 +158,13 @@ Water Temple
 Lab
 Fishing
 Grave
+
+Lab Roof
+Sun Shoot
+Child Dive
+Skulls:****
+
+Pierre
 "]
 
 #-----------------------------------------------------
@@ -119,6 +173,13 @@ GValley[shape="box", color="yellow", label="G Valley
 
 Tent
 Storms G
+Strength G
+
+Watefall
+Crate
+Cow
+Hammer Rocks
+Skulls:****
 "]
 
 #-----------------------------------------------------
@@ -128,11 +189,21 @@ GFortress[shape="box", color="yellow", label="G Fortress
 GTG
 
 Storms G
+
+Roof Chest
+Archery
+Gerudo Card
+Carpenters:****
+Skulls:**
 "]
 
 #-----------------------------------------------------
 #Haunted Wasteland
-Wasteland[shape="box", color="yellow", label="Wasteland"]
+Wasteland[shape="box", color="yellow", label="Wasteland
+
+Chest
+Skull
+"]
 
 #-----------------------------------------------------
 #Desert Colossus
@@ -142,6 +213,10 @@ Spirit Temple
 
 Fairy
 Strength G
+
+Song From Sheik
+Arch
+Skulls:***
 "]
 
 #-----------------------------------------------------
@@ -157,6 +232,8 @@ Bowling
 Chest Game
 Chu Shop
 Back House
+
+Richard
 "]
 
 #-----------------------------------------------------
@@ -167,6 +244,9 @@ Castle[shape="box",  color="white", label="Castle
 Bomb Fairy
 Strength Fairy
 Storms G
+
+Malon
+Skulls:**
 "]
 
 #-----------------------------------------------------
@@ -196,6 +276,9 @@ W Hammer G
 SE Bomb G
 S Bomb G
 S Open G
+
+Zeldas Throw
+Song taught by OoT
 "]
 
 #-----------------------------------------------------
@@ -216,6 +299,12 @@ Potion Back
 Grannys
 Bomb G
 Open G
+
+Man on Roof
+Anju
+Chickens
+Song from Shiek
+Skulls:******
 "]
 
 #-----------------------------------------------------
@@ -229,6 +318,10 @@ Shield Grave
 Dampes Grave
 Suns Grave
 Royal Tomb
+
+Dampe Digging
+Bean Crate
+Skulls:**
 "]
 
 #-----------------------------------------------------
@@ -240,6 +333,12 @@ Stables
 House
 Back
 Open G
+
+Song from Malon
+Skulls:****
+
+Horse
+Links Cow
 "]
 
 Kokiri -> WoodsFromKokiri [ label = "Woods" ]

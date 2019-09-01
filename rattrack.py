@@ -108,7 +108,11 @@ def parse_interiors(text):
             checked.set(0)
             notes = StringVar()
             notes.set("")
-            segment.append({ "checked" : checked, "name" : line, "notes" : notes })
+            name = line
+            if len(line.split(":")) == 2:
+                notes.set(line.split(":")[1])
+                name = line.split(":")[0]
+            segment.append({ "checked" : checked, "name" : name, "notes" : notes })
         else:
             if segment is not None:
                 ret["segments"].append(segment)
@@ -142,7 +146,7 @@ class TextWindow(object):
         top.title(interiors["title"])
 
         checkedlabel = Label(top, text = "Cleared")
-        interiorlabel = Label(top, text = "Interior")
+        interiorlabel = Label(top, text = "Check")
         noteslabel = Label(top, text = "Notes")
         checkedlabel.grid(row=0, column=1, padx=15, pady=15)
         interiorlabel.grid(row=0, column=0, padx=15, pady=15, sticky=W)
