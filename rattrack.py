@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
 from tkinter import *
+from PIL import Image
+from PIL import ImageTk
 import subprocess
 import xml.etree.ElementTree
 import os
@@ -208,6 +210,7 @@ class TrackerCanvas(Canvas):
 
     def __init__(self, window):
         super().__init__(window)
+        self.zoom_factor = 1000
         self.window = window
         self.bind("<ButtonPress-1>", self.startDrag)
         self.bind("<B1-Motion>", self.drag)
@@ -282,7 +285,14 @@ class TrackerCanvas(Canvas):
         subprocess.call((dot_path + " -Tsvg -o reduced.svg reduced.dot").split(" "))
 
         self.et = xml.etree.ElementTree.parse('reduced.svg').getroot()
-        self.f = PhotoImage(file=mangle_path("docs/reduced.png"))
+
+        img = Image.open(mangle_path("docs/reduced.png"))
+        if (self.zoom_factor != 1000):
+            img = img.resize((int(img.width * self.zoom_factor / 1000), \
+                              int(img.height * self.zoom_factor / 1000)), Image.ANTIALIAS);
+
+        self.f = ImageTk.PhotoImage(img)
+
         self.width = self.f.width()
         self.height = self.f.height()
 
@@ -310,6 +320,18 @@ class TrackerCanvas(Canvas):
         if label.split(" <-> ")[1] == clicked:
             return "disconnect " + label.split(" <-> ")[0]
         return None
+
+    def zoom_in(self, event=None):
+        self.zoom_factor += 100;
+        if (self.zoom_factor > 1500):
+            self.zoom_factor = 1500;
+        self.redraw()
+
+    def zoom_out(self, event=None):
+        self.zoom_factor -= 100;
+        if (self.zoom_factor < 500):
+            self.zoom_factor = 500;
+        self.redraw()
 
     def menu(self, event):
         popup = Menu(window, tearoff=0)
@@ -345,6 +367,9 @@ class TrackerCanvas(Canvas):
                                           command = lambda : self.add_root(name))
                     add_command(n.get_name())
 
+        popup.add_separator()
+        popup.add_command(label="Zoom In (+)", command = lambda : self.zoom_in())
+        popup.add_command(label="Zoom Out (-)", command = lambda : self.zoom_out()) 
         popup.add_separator()
         popup.add_command(label="Cancel")
         try:
@@ -425,6 +450,9 @@ class TrackerCanvas(Canvas):
         if (not self.do_connection_unidirectional(a, b)) :
             self.do_connection_unidirectional(b, a)
 
-TrackerCanvas(window)
+canvas = TrackerCanvas(window)
+
+window.bind("<plus>", canvas.zoom_in)
+window.bind("<minus>", canvas.zoom_out)
 
 window.mainloop()

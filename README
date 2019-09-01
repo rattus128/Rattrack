@@ -1,3 +1,7 @@
+System Requirements:
+
+Rattrack requires a lot of screen space. A full HD display or higher is required.
+
 Download:
 
 You can find the latest version at: https://github.com/rattus128/Rattrack/releases
@@ -16,6 +20,7 @@ Usage:
 - Drag owls to a region to connect them
 - Click on regions to edit the region notes
 - Right click on regions for undo commands
+- +/- keys to zoom
 
 Advanced:
 
@@ -24,5 +29,6 @@ Edit OWER.dot to change game data
 Linux Installation:
 
 1. Install python3.6+ and graphviz from your package manager
+2. pip install pillow
 2. Unzip downloaded zip file
 3. run rattrack.py
