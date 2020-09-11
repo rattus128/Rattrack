@@ -1,0 +1,10 @@
+#!/bin/bash
+
+while $(true); do
+    sleep 4
+    git add docs
+    if [ "$(git diff HEAD docs)" != "" ]; then
+        git commit -m updation
+        git push origin -f HEAD:refs/heads/gh-pages
+    fi
+done

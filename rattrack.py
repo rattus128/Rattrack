@@ -11,6 +11,8 @@ import platform
 FORE_COLOR="#909090"
 EDGE_COLOR="#606060"
 
+CHAOS=True
+
 def mangle_path(s):
     if platform.system() == "Windows":
         return s.replace("/", "\\")
@@ -48,17 +50,56 @@ def graph_reduce(graph, roots, filename):
     for root in roots:
         addRoots(gdict[root])
 
+    processed_edges = []
+
     for edge in g.get_edge_list():
-        if edge.get("color") is None:
-            edge.set("color", EDGE_COLOR)
-        if edge.get("fontcolor") is None:
-            edge.set("fontcolor", FORE_COLOR)
+        edge.set("color", EDGE_COLOR)
+        edge.set("fontcolor", FORE_COLOR)
+
         source = edge.get_source()
         dest   = edge.get_destination()
-        if (not source in r) and (not dest in r):
+
+        if ((not source in r) and (not dest in r)) or source == dest:
             g.del_edge(source, dest)
+            continue
         if (source in r) != (dest in r):
             raise Exception("Edge half attached to root nodes")
+
+        if (source, dest) in processed_edges or not CHAOS:
+            continue
+        processed_edges.append((source, dest))
+
+        compound = pydot.Edge(source, dest)
+        compound.set("color", EDGE_COLOR)
+        compound.set("fontcolor", FORE_COLOR)
+        compound_label = ""
+
+        source_node = g.get_node(source)[0]
+        source_label_lines = source_node.get("label").replace("\\\n", "").splitlines()
+
+        for l in [ edge1.get("label") for edge1 in  g.get_edge(source, dest)]:
+            if not l:
+                continue
+            for line in source_label_lines:
+                if line.split(" : ")[0] == l.strip("\""):
+                    compound_label += line + "\n"
+                    source_label_lines.remove(line)
+                    break
+
+        node_label = ""
+        for line in source_label_lines:
+            node_label += line + "\n"
+        source_node.set("label", node_label)
+
+        g.del_edge(source, dest)
+
+        if (compound_label):
+            g.add_edge(compound)
+            compound.set("label", "\"" + compound_label + "\"")
+        else:
+            dest_node = g.get_node(dest)
+            if dest_node[0].get("label") == "\"?\"":
+                g.del_node(dest)
 
     for node in g.get_node_list():
         if node.get("color") is None:
@@ -86,7 +127,7 @@ def unparse_interiors(interiors):
         for interior in segment:
             if interior["checked"].get():
                 continue
-            ret += interior["name"]
+            ret += interior["name"].strip(">")
             if interior["notes"].get():
                 ret += " : " + interior["notes"].get()
             else:
@@ -126,15 +167,44 @@ def parse_interiors(text):
 window = Tk()
 window.title("Rattrack")
 
-roots = [ "Links", "ToT" ]
+#OOTR specific
+roots = [ "Adult", "Child" ]
+
 edges = {}
 interiorss = {}
 
+def make_external(node, exit, shape, seq):
+    name = node.get_name() + "_" + str(seq)
+    question = pydot.Node(name)
+    question.set("label", "\"?\"")
+    question.set("shape", shape)
+    world.add_node(question)
+    edge = pydot.Edge(node.get_name(), name)
+    edge.set("label", "\"" + exit + "\"")
+    world.add_edge(edge)
+
 for node in world.get_node_list():
     edges[node.get_name()] = []
+
+    question_seq = 0
+
     if node.get("shape") == "\"box\"":
         interiors = parse_interiors(node.get("label"))
-        node.set("label", unparse_interiors(interiors))
+        for exit in [ item["name"] for item in interiors["segments"][0] ]:
+            if exit[0] == ">" or CHAOS:
+                make_external(node, exit.strip(">"), "\"box\"", question_seq)
+            else:
+                make_external(node, exit, "\"circle\"", question_seq)
+            question_seq += 1
+        if len(interiors["segments"]) > 1 and CHAOS:
+            for segment in interiors["segments"][1:]:
+                for exit in [ item["name"] for item in segment ]:
+                    if exit[0] == ">":
+                        make_external(node, exit.strip(">"), "\"box\"", question_seq)
+                        question_seq += 1
+        if not CHAOS:
+            interiors["segments"] = interiors["segments"][1:]
+        node.set("label", "\"" + unparse_interiors(interiors) + "\"")
         interiorss[node.get_name()] = interiors
 
 class TextWindow(object):
@@ -158,7 +228,7 @@ class TextWindow(object):
         for segment in interiors["segments"]:
             for interior in segment:
                 checkbutton = Checkbutton(top, variable = interior["checked"])
-                label = Label(top, text = interior["name"])
+                label = Label(top, text = interior["name"].strip(">"))
                 notes = Entry(top, textvariable = interior["notes"])
                 checkbutton.grid(row=row, column=1, padx=15)
                 label.grid(row=row, column=0, padx=15, sticky=W)
@@ -177,15 +247,18 @@ class TextWindow(object):
         top.grid_rowconfigure(row, minsize=20)
         row += 1
 
-        ok = Button(top, text='Ok', command=self.finish)
+        ok = Button(top, text='Refresh', command=self.refresh)
         ok.grid(row=row, column=0, columnspan=3)
 
-    def finish(self):
-        self.node.set("label", unparse_interiors(self.interiors))
-        self.top.destroy()
+    def refresh(self):
+        self.node.set("label", "\"" + unparse_interiors(self.interiors)+ "\"")
         self.canvas.redraw()
 
-def new_edge(a_region, b_region, replaces, headlabel=None, taillabel=None):
+    def finish(self):
+        self.top.destroy()
+        self.refresh()
+
+def new_edge(a_region, b_region, replaces, headlabel=None, taillabel=None, label=None):
     edge = pydot.Edge(a_region, b_region)
     edge.set("color", EDGE_COLOR)
     edge.set("fontcolor", FORE_COLOR)
@@ -196,6 +269,9 @@ def new_edge(a_region, b_region, replaces, headlabel=None, taillabel=None):
     if taillabel is not None:
         name += ":" + taillabel
         edge.set("taillabel", taillabel)
+    if label is not None:
+        name += ":" + label
+        edge.set("label", label)
     name += " <-> " + b_region
     if headlabel is not None:
         name += ":" + headlabel
@@ -360,8 +436,7 @@ class TrackerCanvas(Canvas):
 
         if space:
             for n in world.get_node_list():
-                if not n.get_name() in roots and n.get("label") != "\"?\"" and \
-                                                 n.get("label") != "\"Owl?\"":
+                if not n.get_name() in roots and n.get("label") != "\"?\"":
                     def add_command(name):
                         popup.add_command(label=interiorss[n.get_name()]["title"], \
                                           command = lambda : self.add_root(name))
@@ -397,7 +472,8 @@ class TrackerCanvas(Canvas):
         an = world.get_node(a)[0]
         bn = world.get_node(b)[0]
         if      a == b and \
-                an.get("shape") == "\"box\"":
+                an.get("shape") == "\"box\"" and \
+                an.get("label") != "\"?\"":
                 popup = TextWindow(window, an, self)
                 self.window.wait_window(popup.top)
                 return True
@@ -427,15 +503,16 @@ class TrackerCanvas(Canvas):
             connector.set("minlen", "2.0")
             self.redraw()
             return True
-        elif    an.get("shape") == "\"circle\"" and \
-                an.get("label") == "\"Owl?\""   and \
-                bn.get("shape") == "\"box\"":
+        elif    an.get("shape") == "\"box\"" and \
+                an.get("label") == "\"?\""   and \
+                bn.get("shape") == "\"box\"" and \
+                bn.get("label") != "\"?\"":
             for edge in world.get_edge_list():
                 if edge.get_destination() == a:
                     a_label = edge.get("label")
                     a_region = edge.get_source()
                     a_edge = edge
-            connector = new_edge(a_region, b, [a_edge], taillabel="Owl")
+            connector = new_edge(a_region, b, [a_edge], label = a_label)
             self.redraw()
             return True
         elif    an.get("shape") == "\"circle\"" and \
@@ -451,6 +528,8 @@ class TrackerCanvas(Canvas):
             self.do_connection_unidirectional(b, a)
 
 canvas = TrackerCanvas(window)
+
+pos = 0
 
 window.bind("<plus>", canvas.zoom_in)
 window.bind("<minus>", canvas.zoom_out)

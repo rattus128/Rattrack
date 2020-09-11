@@ -1,22 +1,22 @@
 digraph G {
 
-ToT [ shape="circle", color = "white" ]
-Links [ shape="circle", color = "forestgreen" ]
-
 #-----------------------------------------------------
 #Kokiri Forest
 
 Kokiri[ shape="box", color="forestgreen", label="Kokiri
 
-Deku Tree
+Woods
+Bridge
 
-Midos
-Shop
-Know it All
-Links
-Sarias
-Twins
-Storms G
+>Deku Tree
+
+>Midos
+>Shop
+>Know it All
+>Links
+>Sarias
+>Twins
+>Storms G
 
 Sword
 Skulls:***
@@ -26,9 +26,14 @@ Skulls:***
 #Lost Woods
 Woods[shape="box", color="forestgreen", label="Woods
 
-Warp Bomb G
-SFM Bomb G
-Open G
+River
+Goron
+Kokiri
+Meadow
+
+>Warp Bomb G
+>SFM Bomb G
+>Open G
 
 Target
 Ocarina
@@ -39,20 +44,27 @@ Skulls:***
 
 #-----------------------------------------------------
 #Lost Woods Bridge
-Bridge[shape="box", color="forestgreen", label="LW Bridge
+Bridge[shape="box", color="forestgreen", label="Bridge
+
+Kokiri
+Field
 
 Gift from Saria
 "]
 
+Bridge -> Woods [ label = "", arrowhead="none", arrowtail="none" ]
+
 #-----------------------------------------------------
 #Sacred Forest Meadow
-SFMeadow[shape="box", color="forestgreen", label="SF Meadow
+Meadow[shape="box", color="forestgreen", label="Meadow
 
-Forest Temple
+Woods
 
-Bomb G
-Open G
-Storms G
+>Forest Temple
+
+>Bomb G
+>Open G
+>Storms G
 
 Song From Saria
 Song from Sheik
@@ -63,11 +75,16 @@ Skulls:*
 #Death Mountain Trail
 Trail[ shape="box", color="red", label="Trail
 
-Dodongos
+Goron
+Kakariko
+Crater
+>Owl
 
-Fairy
-Bomb G
-Storms G
+>Dodongos
+
+>Fairy
+>Bomb G
+>Storms G
 
 DC roof
 Biggoron
@@ -79,12 +96,16 @@ Skulls:****
 #Death Mountain Crater
 Crater[ shape="box", color="red", label="Crater
 
-Fire Temple
+Goron
+Trail
 
-Fairy
-Hammer G
-Bomb G
+>Fire Temple
 
+>Fairy
+>Hammer G
+>Bomb G
+
+Song from Sheik
 Volcano
 Cliff
 Scrub
@@ -95,24 +116,33 @@ Skulls:**
 #Goron City
 Goron[ shape="box", color="red", label="Goron
 
-Shop
-Open G
+Woods
+Trail
+Crater
+
+>Shop
+>Open G
 
 Link the Goron
 Hot Rodder
 Darunia
 Spinning Pot
+Medigoron
 Skulls:**
 Chests:***
 "]
 
 #-----------------------------------------------------
 #Zoras River
-ZRiver[shape="box", color="blue", label="Z River
+River[shape="box", color="blue", label="River
 
-Storms G
-Bomb G
-Open G
+Field
+Domain
+Woods
+
+>Storms G
+>Bomb G
+>Open G
 
 Frogs in Rain
 Frogs Final Reward
@@ -123,10 +153,14 @@ Skulls:****
 
 #-----------------------------------------------------
 #Zoras Domain
-ZDomain[shape="box", color="blue", label="Z Domain
+Domain[shape="box", color="blue", label="Domain
 
-Shop
-Storms G
+River
+Fountain
+Lake
+
+>Shop
+>Storms G
 
 Diving
 Torches
@@ -136,12 +170,14 @@ Skull
 
 #-----------------------------------------------------
 #Zoras Fountain
-ZFountain[shape="box", color="blue", label="Z Fountain
+Fountain[shape="box", color="blue", label="Fountain
 
-Jabu
-Ice Cavern
+Domain
 
-Fairy
+>Jabu
+>Ice Cavern
+
+>Fairy
 
 Free PoH
 Under Water PoH
@@ -153,11 +189,15 @@ Skulls:***
 
 Lake[shape="box", color="cyan", label="Lake
 
-Water Temple
+Field
+Domain
+>Owl
 
-Lab
-Fishing
-Grave
+>Water Temple
+
+>Lab
+>Fishing
+>Grave
 
 Lab Roof
 Sun Shoot
@@ -169,26 +209,36 @@ Pierre
 
 #-----------------------------------------------------
 #Gerudo Valley
-GValley[shape="box", color="yellow", label="G Valley
+Valley[shape="box", color="yellow", label="Valley
 
-Tent
-Storms G
-Strength G
+Field
+Fortress
+Lake
 
-Watefall
+>Tent
+>Storms G
+>Strength G
+
+Waterfall
 Crate
 Cow
 Hammer Rocks
 Skulls:****
 "]
 
+
+#Valley -> Lake [ label = "" ]
+
 #-----------------------------------------------------
 #Gerudo Fortress
-GFortress[shape="box", color="yellow", label="G Fortress
+Fortress[shape="box", color="yellow", label="Fortress
 
-GTG
+Valley
+Wasteland
 
-Storms G
+>GTG
+
+>Storms G
 
 Roof Chest
 Archery
@@ -201,18 +251,24 @@ Skulls:**
 #Haunted Wasteland
 Wasteland[shape="box", color="yellow", label="Wasteland
 
+Colossus
+Fortress
+
 Chest
 Skull
+Carpet
 "]
 
 #-----------------------------------------------------
 #Desert Colossus
 Colossus[shape="box", color="yellow", label="Colossus
 
-Spirit Temple
+Wasteland
 
-Fairy
-Strength G
+>Spirit Temple
+
+>Fairy
+>Strength G
 
 Song From Sheik
 Arch
@@ -224,14 +280,18 @@ Skulls:***
 
 Market[shape="box", color="white", label="Market
 
-Bazaar
-Potion Shop
-Mask Shop
-Shooting
-Bowling
-Chest Game
-Chu Shop
-Back House
+Street
+Temple
+Castle
+
+>Bazaar
+>Potion Shop
+>Mask Shop
+>Shooting
+>Bowling
+>Chest Game
+>Chu Shop
+>Back House
 
 Richard
 "]
@@ -241,11 +301,14 @@ Richard
 
 Castle[shape="box",  color="white", label="Castle
 
-Bomb Fairy
-Strength Fairy
-Storms G
+Market
+
+>Bomb Fairy
+>Strength Fairy
+>Storms G
 
 Malon
+Song from Impa
 Skulls:**
 "]
 
@@ -254,28 +317,41 @@ Skulls:**
 
 Street[shape="box", color="white", label="Street
 
-Pots
+Market
+Field
+
+>Pots
 "]
 
 #-----------------------------------------------------
 #Outside Temple of Time
-OToT[shape="box", color="white", label="Outside Temple
+Temple[shape="box", color="white", label="Temple
 
-ToT
+Market
+
+>Temple
 "]
 
 #-----------------------------------------------------
 #Hyrule Field
 Field[ shape="box", color="darkgreen", label="Field
 
-NE Bomb G
-NW Bomb G
-N Bomb G
-Tree Bomb G
-W Hammer G
-SE Bomb G
-S Bomb G
-S Open G
+Street
+Valley
+Lake
+Bridge
+Ranch
+River
+Kakariko
+
+>NE Bomb G
+>NW Bomb G
+>N Bomb G
+>Tree Bomb G
+>W Hammer G
+>SE Bomb G
+>S Bomb G
+>S Open G
 
 Zeldas Throw
 Song taught by OoT
@@ -285,25 +361,29 @@ Song taught by OoT
 #Kakariko Village
 Kakariko[ shape="box", color="orange", label="Kakariko
 
-Well
+Trail
+Graveyard
+Field
 
-Impas House
-Impas Back
-Skul House
-Shooting
-Windmill
-Boss's House
-Bazaar
-Potion Shop
-Potion Back
-Grannys
-Bomb G
-Open G
+>Well
+
+>Impas House
+>Impas Back
+>Skul House
+>Shooting
+>Windmill
+>Boss's House
+>Bazaar
+>Potion Shop
+>Potion Back
+>Grannys
+>Bomb G
+>Open G
 
 Man on Roof
 Anju
 Chickens
-Song from Shiek
+Song from Sheik
 Skulls:******
 "]
 
@@ -311,13 +391,15 @@ Skulls:******
 #Graveyard
 Graveyard[ shape="box", color="orange", label="Graveyard
 
-Shadow
+Kakariko
 
-Hut
-Shield Grave
-Dampes Grave
-Suns Grave
-Royal Tomb
+>Shadow
+
+>Hut
+>Shield Grave
+>Dampes Grave
+>Suns Grave
+>Royal Tomb
 
 Dampe Digging
 Bean Crate
@@ -329,128 +411,78 @@ Skulls:**
 
 Ranch[shape="box", color="darkgreen", label="Ranch
 
-Stables
-House
-Back
-Open G
+Field
+
+>Stables
+>House
+>Back
+>Open G
 
 Song from Malon
 Skulls:****
 
 Horse
-Links Cow
 "]
 
-Kokiri -> WoodsFromKokiri [ label = "Woods" ]
-Kokiri -> BridgeFromKokiri [ label = "LW Bridge" ]
-Woods -> ZRiverFromWoods [ label = "Z River" ]
-Woods -> GoronFromWoods [ label = "Goron" ]
-Woods -> KokiriFromWoods [ label = "Kokiri" ]
-Woods -> SFMeadowFromWoods [ label = "SF Meadow" ]
-Bridge -> KokiriFromBridge [ label = "Kokiri" ]
-Bridge -> FieldFromBridge [ label = "Field" ]
-Bridge -> Woods [ label = "", arrowhead="none", arrowtail="none" ]
-SFMeadow -> WoodsFromSFMeadow [ label = "Woods" ]
-Trail -> GoronFromTrail [ label="Goron" ]
-Trail -> KakarikoFromTrail [ label="Kakariko" ]
-Trail -> CraterFromTrail [ label="Crater" ]
-Trail -> TrailOwl [ label="Owl" ]
-Crater -> GoronFromCrater  [ label="Goron" ]
-Crater -> TrailFromCrater  [ label="Trail" ]
-Goron -> WoodsFromGoron [ label="Woods"]
-Goron -> TrailFromGoron [ label="Trail"]
-Goron -> CraterFromGoron [ label="Crater"]
-ZRiver -> FieldFromZRiver [ label = "Field" ]
-ZRiver -> ZDomainFromZRiver [ label = "Z Domain" ]
-ZRiver -> WoodsFromZRiver [ label = "Woods" ]
-ZDomain -> ZRiverFromZDomain [ label = "Z River" ]
-ZDomain -> ZFountainFromZDomain [ label = "Z Fountain" ]
-ZDomain -> LakeFromZDomain [ label = "Lake"]
-ZFountain -> ZDomainFromZFountain [ label = "Z Domain" ]
-Lake -> FieldFromLake [ label="Field"]
-Lake -> ZDomainFromLake [ label="Z Domain"]
-Lake -> LakeOwl [ label="Owl" ]
-GValley -> FieldFromGValley [ label="Field"]
-GValley -> GFortressFromGValley [ label="G Fortress"]
-GValley -> Lake [ label="Lake"]
-GFortress -> GValleyFromGFortress [ label="G Valley"]
-GFortress -> WastelandFromGFortress [ label="Wasteland"]
-Wasteland -> ColossusFromWasteland [ label="Colossus"]
-Wasteland -> GFortressFromWasteland [ label="G Fortress"]
-Colossus -> WastelandFromColossus [ label="Wasteland"]
-Market -> StreetFromMarket [ label="Street"]
-Market -> OToTFromMarket [ label="Temple"]
-Market -> CastleFromMarket [ label="Castle"]
-Castle -> MarketFromCastle [ label="Market"]
-Street -> MarketFromStreet [ label="Market" ]
-Street -> FieldFromStreet [ label="Field" ]
-OToT -> MarketFromOToT [ label="Market"]
-Field -> StreetFromField [label="Street"]
-Field -> GValleyFromField [label="G Valley"]
-Field -> LakeFromField [label="Lake"]
-Field -> BridgeFromField [label="LW Bridge"]
-Field -> RanchFromField [label="Ranch"]
-Field -> ZRiverFromField [label="Z River"]
-Field -> KakarikoFromField [label="Kakariko"]
-Kakariko -> TrailFromKakariko [ label="Trail"]
-Kakariko -> GraveyardFromKakariko [ label="Graveyard" ]
-Kakariko -> FieldFromKakariko [ label="Field" ]
-Graveyard -> KakarikoFromGraveyard [ label="Kakariko" ]
-Ranch -> FieldFromRanch [ label="Field"]
+#-----------------------------------------------------
+#Misc Interiors
 
-TrailFromKakariko [ shape="circle", label="?" ]
-GraveyardFromKakariko [ shape="circle", label="?" ]
-FieldFromKakariko [ shape="circle", label="?" ]
-KakarikoFromGraveyard [ shape="circle", label="?" ]
-WoodsFromKokiri [ shape="circle", label="?" ]
-BridgeFromKokiri [ shape="circle", label="?" ]
-KokiriFromBridge [ shape="circle", label="?" ]
-FieldFromBridge [ shape="circle", label="?" ]
-ZRiverFromWoods [ shape="circle", label="?" ]
-GoronFromWoods [ shape="circle", label="?" ]
-KokiriFromWoods [ shape="circle", label="?" ]
-SFMeadowFromWoods [ shape="circle", label="?" ]
-WoodsFromSFMeadow [ shape="circle", label="?" ]
-FieldFromZRiver [ shape="circle", label="?" ]
-ZDomainFromZRiver [ shape="circle", label="?" ]
-WoodsFromZRiver [ shape="circle", label="?" ]
-ZRiverFromZDomain [ shape="circle", label="?" ]
-ZFountainFromZDomain [ shape="circle", label="?" ]
-LakeFromZDomain [ shape="circle", label="?" ]
-ZDomainFromZFountain [ shape="circle", label="?" ]
-GoronFromTrail [ shape="circle", label="?" ]
-KakarikoFromTrail [ shape="circle", label="?" ]
-CraterFromTrail [ shape="circle", label="?" ]
-GoronFromCrater [ shape="circle", label="?" ]
-TrailFromCrater [ shape="circle", label="?" ]
-WoodsFromGoron [ shape="circle", label="?" ]
-TrailFromGoron [ shape="circle", label="?" ]
-CraterFromGoron [ shape="circle", label="?" ]
-FieldFromGValley [ shape="circle", label="?" ]
-GFortressFromGValley [ shape="circle", label="?" ]
-GValleyFromGFortress [ shape="circle", label="?" ]
-WastelandFromGFortress [ shape="circle", label="?" ]
-ColossusFromWasteland [ shape="circle", label="?" ]
-GFortressFromWasteland [ shape="circle", label="?" ]
-WastelandFromColossus [ shape="circle", label="?" ]
-FieldFromLake [ shape="circle", label="?" ]
-ZDomainFromLake [ shape="circle", label="?" ]
-StreetFromMarket [ shape="circle", label="?" ]
-OToTFromMarket [ shape="circle", label="?" ]
-CastleFromMarket [ shape="circle", label="?" ]
-MarketFromCastle [ shape="circle", label="?" ]
-MarketFromStreet [ shape="circle", label="?" ]
-FieldFromStreet [ shape="circle", label="?" ]
-MarketFromOToT [ shape="circle", label="?" ]
-FieldFromRanch [ shape="circle", label="?" ]
-StreetFromField [ shape="circle", label="?" ]
-GValleyFromField [ shape="circle", label="?" ]
-LakeFromField [ shape="circle", label="?" ]
-BridgeFromField [ shape="circle", label="?" ]
-RanchFromField [ shape="circle", label="?" ]
-ZRiverFromField [ shape="circle", label="?" ]
-KakarikoFromField [ shape="circle", label="?" ]
+Adult [ shape="box", color = "white", label="Adult
 
-LakeOwl [ shape="circle", label="Owl?" ]
-TrailOwl [ shape="circle", label="Owl?" ]
+>exit
+"]
+
+Child [ shape="box", color = "forestgreen",  label="Child
+
+>exit
+"]
+
+Potion [ shape="box", color = "orange",  label="Potion
+
+>Front
+>Back
+
+Shopping
+"]
+
+Dampes [ shape="box", color = "orange",  label="Dampes
+
+>Kakariko
+>Graveyard
+
+Windmill Song
+Windmill PoH
+Races:**
+"]
+
+Minuet[ shape="box", color="forestgreen", label="Minuet
+
+>exit
+"]
+
+Bolero[ shape="box", color="red", label="Bolero
+
+>exit
+"]
+
+Serenade[ shape="box", color="cyan", label="Serenade
+
+>exit
+"]
+
+Requiem[ shape="box", color="yellow", label="Requiem
+
+>exit
+"]
+
+Nocturne[ shape="box", color="orange", label="Nocturne
+
+>exit
+"]
+
+Prelude[ shape="box", color="white", label="Prelude
+
+>exit
+"]
+
 }
