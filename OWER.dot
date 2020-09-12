@@ -3,10 +3,10 @@ digraph G {
 #-----------------------------------------------------
 #Kokiri Forest
 
-Kokiri[ shape="box", color="forestgreen", label="Kokiri
+KokiriForest[ shape="box", color="forestgreen", label="Kokiri Forest
 
-Woods
-Bridge
+Lost Woods
+LW Bridge
 
 >Deku Tree
 
@@ -19,17 +19,20 @@ Bridge
 >Storms G
 
 Sword
-Skulls:***
+
+GS Soil
+GS Know it all
+GS Twins
 "]
 
 #-----------------------------------------------------
 #Lost Woods
-Woods[shape="box", color="forestgreen", label="Woods
+LostWoods[shape="box", color="forestgreen", label="Lost Woods
 
 River
 Goron
-Kokiri
-Meadow
+Kokiri Forest
+SF Meadow
 
 >Warp Bomb G
 >SFM Bomb G
@@ -38,27 +41,30 @@ Meadow
 Target
 Ocarina
 Skull Kid
-Scrubs:***
-Skulls:***
+Scrubs x2
+Bridge Scrub
+
+GS Soil x2
+GS Bean Ride
 "]
 
 #-----------------------------------------------------
 #Lost Woods Bridge
-Bridge[shape="box", color="forestgreen", label="Bridge
+LWBridge[shape="box", color="forestgreen", label="LW Bridge
 
-Kokiri
+Kokiri Forest
 Field
 
 Gift from Saria
 "]
 
-Bridge -> Woods [ label = "", arrowhead="none", arrowtail="none" ]
+LWBridge -> LostWoods [ label = "", arrowhead="none", arrowtail="none" ]
 
 #-----------------------------------------------------
 #Sacred Forest Meadow
-Meadow[shape="box", color="forestgreen", label="Meadow
+SFMeadow[shape="box", color="forestgreen", label="SF Meadow
 
-Woods
+Lost Woods
 
 >Forest Temple
 
@@ -68,7 +74,8 @@ Woods
 
 Song From Saria
 Song from Sheik
-Skulls:*
+
+GS
 "]
 
 #-----------------------------------------------------
@@ -89,7 +96,10 @@ Crater
 DC roof
 Biggoron
 Bomb Alcove
-Skulls:****
+
+GS Bomb
+GS Soil
+GS Hammer x2
 "]
 
 #-----------------------------------------------------
@@ -109,14 +119,16 @@ Song from Sheik
 Volcano
 Cliff
 Scrub
-Skulls:**
+
+GS Soil
+GS Crate
 "]
 
 #-----------------------------------------------------
 #Goron City
 Goron[ shape="box", color="red", label="Goron
 
-Woods
+Lost Woods
 Trail
 Crater
 
@@ -128,8 +140,11 @@ Hot Rodder
 Darunia
 Spinning Pot
 Medigoron
-Skulls:**
-Chests:***
+Maze Chests x2
+Hammer Chest
+
+GS Maze
+GS Ropes
 "]
 
 #-----------------------------------------------------
@@ -138,7 +153,7 @@ River[shape="box", color="blue", label="River
 
 Field
 Domain
-Woods
+Lost Woods
 
 >Storms G
 >Bomb G
@@ -147,8 +162,11 @@ Woods
 Frogs in Rain
 Frogs Final Reward
 Bean Sales
-PoH x2:**
-Skulls:****
+PoH x2
+
+GS Tree
+GS Ladder
+GS Walls x2
 "]
 
 #-----------------------------------------------------
@@ -165,7 +183,8 @@ Lake
 Diving
 Torches
 Unfreeze
-Skull
+
+GS
 "]
 
 #-----------------------------------------------------
@@ -181,7 +200,10 @@ Domain
 
 Free PoH
 Under Water PoH
-Skulls:***
+
+GS Tree
+GS Rang
+GS Strength2
 "]
 
 #-----------------------------------------------------
@@ -202,17 +224,21 @@ Domain
 Lab Roof
 Sun Shoot
 Child Dive
-Skulls:****
+
+GS Lake
+GS Soil
+GS Lab
+GS Tree
 
 Pierre
 "]
 
 #-----------------------------------------------------
 #Gerudo Valley
-Valley[shape="box", color="yellow", label="Valley
+G Valley[shape="box", color="yellow", label="G Valley
 
 Field
-Fortress
+G Fort
 Lake
 
 >Tent
@@ -223,18 +249,21 @@ Waterfall
 Crate
 Cow
 Hammer Rocks
-Skulls:****
+
+GS Soil
+GS Rang
+GS Hook x2
 "]
 
-
-#Valley -> Lake [ label = "" ]
+#broken in chaos san
+G Valley -> Lake [ label = "" ]
 
 #-----------------------------------------------------
 #Gerudo Fortress
-Fortress[shape="box", color="yellow", label="Fortress
+G Fort[shape="box", color="yellow", label="G Fort
 
-Valley
-Wasteland
+G Valley
+H Wasteland
 
 >GTG
 
@@ -244,15 +273,17 @@ Roof Chest
 Archery
 Gerudo Card
 Carpenters:****
-Skulls:**
+
+GS Fort
+GS Archery
 "]
 
 #-----------------------------------------------------
 #Haunted Wasteland
-Wasteland[shape="box", color="yellow", label="Wasteland
+H Wasteland[shape="box", color="yellow", label="H Wasteland
 
-Colossus
-Fortress
+D Colossus
+G Fort
 
 Chest
 Skull
@@ -261,9 +292,9 @@ Carpet
 
 #-----------------------------------------------------
 #Desert Colossus
-Colossus[shape="box", color="yellow", label="Colossus
+D Colossus[shape="box", color="yellow", label="D Colossus
 
-Wasteland
+H Wasteland
 
 >Spirit Temple
 
@@ -272,7 +303,10 @@ Wasteland
 
 Song From Sheik
 Arch
-Skulls:***
+
+GS Soil
+GS Tree
+GS Hill
 "]
 
 #-----------------------------------------------------
@@ -309,7 +343,9 @@ Market
 
 Malon
 Song from Impa
-Skulls:**
+
+GS Tree
+GS Wall
 "]
 
 #-----------------------------------------------------
@@ -337,9 +373,9 @@ Market
 Field[ shape="box", color="darkgreen", label="Field
 
 Street
-Valley
+G Valley
 Lake
-Bridge
+LW Bridge
 Ranch
 River
 Kakariko
@@ -384,7 +420,13 @@ Man on Roof
 Anju
 Chickens
 Song from Sheik
-Skulls:******
+
+GS Bazaar
+GS Skul House
+GS Construction
+GS Tree
+GS Ladder
+GS Impas
 "]
 
 #-----------------------------------------------------
@@ -403,7 +445,9 @@ Kakariko
 
 Dampe Digging
 Bean Crate
-Skulls:**
+
+GS Soil
+GS Wall
 "]
 
 #-----------------------------------------------------
@@ -419,7 +463,11 @@ Field
 >Open G
 
 Song from Malon
-Skulls:****
+
+GS House
+GS Tree
+GS Fence
+GS Wall
 
 Horse
 "]
@@ -452,7 +500,8 @@ Dampes [ shape="box", color = "orange",  label="Dampes
 
 Windmill Song
 Windmill PoH
-Races:**
+Race 1
+Race 2
 "]
 
 Minuet[ shape="box", color="forestgreen", label="Minuet

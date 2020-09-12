@@ -7,11 +7,67 @@ import subprocess
 import xml.etree.ElementTree
 import os
 import platform
+import string
 
 FORE_COLOR="#909090"
 EDGE_COLOR="#606060"
 
-CHAOS=True
+CHAOS=False
+
+aliases = [
+    ("kf", "Kokiri Forest"),
+    ("lw", "Lost Woods"),
+    ("wb", "LW Bridge"),
+    ("sf", "SF Meadow"),
+
+    ("", ""),
+
+    ("go", "Goron City"),
+    ("mc", "DM Crater"),
+    ("mt", "DM Trail"),
+
+    ("", ""),
+
+    ("zr", "Z River"),
+    ("zd", "Z Domain"),
+    ("zf", "Z Fount"),
+
+    ("", ""),
+
+    ("gv", "G Valley"),
+    ("gf", "G Fort"),
+    ("hw", "H Wasteland"),
+    ("dc", "D Colossus"),
+
+    ("", ""),
+
+    ("lh", "Lake Hylia"),
+    ("hf", "H Field"),
+    ("ll", "LL Ranch"),
+    ("ma", "Market"),
+    ("hc", "H Castle"),
+
+    ("", ""),
+
+    ("kv", "Kakariko V."),
+    ("gr", "Graveyard"),
+    ("dw", "Dampes/Windmill"),
+    ("po", "Potion Shop"),
+
+    ("", ""),
+
+    ("mi", "Minuet"),
+    ("bo", "Bolero"),
+    ("se", "Serenade"),
+    ("no", "Nocturne"),
+    ("re", "Requiem"),
+    ("pr", "Prelude"),
+
+    ("", ""),
+
+    ("ad", "Adult"),
+    ("ch", "Child")
+]
 
 def mangle_path(s):
     if platform.system() == "Windows":
@@ -207,6 +263,8 @@ for node in world.get_node_list():
         node.set("label", "\"" + unparse_interiors(interiors) + "\"")
         interiorss[node.get_name()] = interiors
 
+open_windows = []
+
 class TextWindow(object):
     def __init__(self, master, node, canvas):
         self.node = node
@@ -237,6 +295,10 @@ class TextWindow(object):
             top.grid_rowconfigure(row, minsize=20)
             row += 1
 
+        if (row == 1):
+            self.finish()
+            return
+
         #OOTR specific
         woth = Checkbutton(top, text="Way of the Hero", variable = interiors["woth"])
         fool = Checkbutton(top, text="A Foolish Choice", variable = interiors["fool"])
@@ -249,6 +311,9 @@ class TextWindow(object):
 
         ok = Button(top, text='Refresh', command=self.refresh)
         ok.grid(row=row, column=0, columnspan=3)
+
+        open_windows.append(self)
+        master.window.wait_window(top)
 
     def refresh(self):
         self.node.set("label", "\"" + unparse_interiors(self.interiors)+ "\"")
@@ -292,6 +357,8 @@ class TrackerCanvas(Canvas):
         self.bind("<B1-Motion>", self.drag)
         self.bind("<ButtonRelease-1>", self.stopDrag)
         self.bind("<ButtonPress-3>", self.menu)
+        self.location = "Select"
+        self.headline = ""
         self.redraw()
 
     def add_root(self, r):
@@ -347,7 +414,17 @@ class TrackerCanvas(Canvas):
                         return title
         return None
 
+    def text_redraw(self):
+        os.system('cls' if os.name=='nt' else 'clear')
+        print(self.headline)
+        print("")
+        if (self.location == "Select" or self.location == "Select1"):
+            for (alias, longform) in aliases:
+                print(("[" + alias + "] " if alias else "") + longform)
+
     def redraw(self):
+
+        self.text_redraw()
 
         graph_reduce(world, roots, "reduced.dot")
 
@@ -396,6 +473,39 @@ class TrackerCanvas(Canvas):
         if label.split(" <-> ")[1] == clicked:
             return "disconnect " + label.split(" <-> ")[0]
         return None
+
+    def key(self, event=None):
+
+        if (event.keysym == "w"):
+            self.location = "Select"
+            self.headline = ""
+            self.text_redraw()
+            return
+
+        if (event.keysym == "x"):
+            self.redraw()
+            return
+
+        if   (self.location == "Select"):
+            self.char1 = event.keysym
+            self.location = "Select1"
+            return
+
+        if (self.location == "Select1"):
+            entered = "" + self.char1 + event.keysym
+            print("Entered:" + entered) 
+            for (alias, longform) in aliases:
+                print(entered + "." + alias)
+                if (entered == alias):
+                    self.headline = "Moved Link to " + longform
+                    self.location = longform
+                    self.text_redraw()
+                    popup = TextWindow(window, world.get_node(longform)[0], self)
+                    return
+            self.headline = "Region \"" + entered + "\" not valid"
+            self.location = "Select"
+            self.text_redraw()
+            return
 
     def zoom_in(self, event=None):
         self.zoom_factor += 100;
@@ -475,7 +585,6 @@ class TrackerCanvas(Canvas):
                 an.get("shape") == "\"box\"" and \
                 an.get("label") != "\"?\"":
                 popup = TextWindow(window, an, self)
-                self.window.wait_window(popup.top)
                 return True
         if      an.get("shape") == "\"circle\"" and \
                 an.get("label") == "\"?\"":
@@ -533,5 +642,11 @@ pos = 0
 
 window.bind("<plus>", canvas.zoom_in)
 window.bind("<minus>", canvas.zoom_out)
+
+for c in string.ascii_lowercase:
+    window.bind("" + c, canvas.key)
+
+for i in range(10):
+    window.bind(str(i), canvas.key)
 
 window.mainloop()
